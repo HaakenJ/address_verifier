@@ -1,0 +1,455 @@
+$light-base: #00A8E8;
+$mid-base: #007EA7;
+$primary: #073dd2;
+$secondary: #d29c07;
+$light-bg: #E7E9FB;
+$dark-text: #00171F;
+$header-font: 'Share Tech Mono',
+monospace;
+
+body {
+    height: 4300px;
+    color: $dark-text;
+}
+
+.banner {
+    background-color: $primary;
+}
+
+nav {
+    background-color: $primary;
+}
+
+.logo {
+    color: #FFFFFF;
+    font-family: $header-font;
+}
+
+.header {
+    font-family: $header-font;
+    text-shadow: 1px 1px 1px rgb(175, 175, 175);
+}
+
+@media only screen and (max-width: 767px) {
+
+    #nav-logo {
+        font-size: 0.6rem;
+        position: relative;
+        left: 175px;
+    }
+
+    .banner {
+        height: 400px;
+        background-image: url("../images/data-center.png");
+    }
+
+    .logo-container {
+        position: relative;
+        top: 135px;
+        left: -40px;
+        text-shadow: 2px 5px 5px gray;
+    }
+
+    .logo {
+        font-size: 5rem;
+        font-family: $header-font;
+    }
+
+    #logo-what {
+        position: absolute;
+        top: -130px;
+        left: 17%;
+    }
+
+    #logo-my {
+        position: absolute;
+        left: 45%;
+    }
+
+    #logo-data {
+        position: absolute;
+        top: 135px;
+        left: 47%;
+    }
+
+    .description {
+        font-family: $header-font;
+        font-size: 3rem;
+        margin: 20px;
+        text-align: center;
+        width: 80%;
+        font-weight: 600;
+        margin-top: 30px;
+    }
+
+    .data-container {
+        position: relative;
+        margin-top: 200px;
+    }
+
+    .chart-container {
+        display: flex;
+        flex-direction: column;
+        margin-top: 300px;
+    }
+
+    .card-title {
+        font-size: 2rem;
+        font-weight: 600;
+    }
+
+    .card-desc {
+        font-weight: 500;
+    }
+
+    .data {
+        font-weight: 400;
+    }
+
+    .card-shadow {
+        background-color: $primary;
+        height: 240px;
+        width: 317px;
+        z-index: -1;
+    }
+
+    .left-shadow,
+    .right-shadow {
+        position: absolute;
+        top: -15px;
+        left: -15px;
+    }
+
+    .card-content {
+        min-height: 320px;
+        padding: 25px;
+        line-height: 2;
+        background-color: #FFFFFF;
+    }
+
+    div.chart-card {
+        padding: 8px;
+    }
+
+    .data-container 
+    .col.s6.right-side-text {
+        position: relative;
+        right: -45px;
+    }
+
+    .card-about {
+        position: relative;
+        top: 33px;
+        max-width: 350px;
+    }
+
+    div.software-card {
+        position: absolute;
+        right: 10px;
+        top: 0;
+        width: 94%;
+    }
+
+    div.mobile-about {
+        top: 400px;
+    }
+
+    #gyro-card {
+        position: relative;
+        right: 10px;
+        top: 0;
+    }
+
+    ul.data.lists {
+        padding-left: 20px;
+        margin-top: 0;
+    }
+
+    ul li.list-item {
+        list-style-type: circle;
+    }
+
+    .top-margin {
+        margin-top: 450px
+    }
+
+    .learn-more {
+        font-family: $header-font;
+        font-size: 1.3rem;
+    }
+
+    .link-btn {
+        background-color: $secondary;
+        font-family: $header-font;
+        display: block;
+    }
+
+    .link-btn:hover {
+        background-color: #d4db32;
+    }
+
+    #user-agent-exp {
+        margin-top: 20px;
+    }
+
+    #user-agent-spoof {
+        margin-top: 20px;
+    }
+
+    #deviceType-chart,
+    #browser-chart,
+    #regions-chart {
+        width: 250px;
+        height: 200px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+
+    #nav-logo {
+        font-size: 1.3rem;
+    }
+
+    .banner {
+        height: 575px;
+        background-image: url("../images/data-center.png");
+    }
+
+    .logo-container {
+        position: relative;
+        top: 135px;
+        text-shadow: 2px 5px 5px gray;
+    }
+
+    .logo {
+        font-size: 10rem;
+        font-family: $header-font;
+    }
+
+    #logo-what {
+        position: absolute;
+        top: -130px;
+        left: 17%;
+    }
+
+    #logo-my {
+        position: absolute;
+        left: 45%;
+    }
+
+    #logo-data {
+        position: absolute;
+        top: 135px;
+        left: 47%;
+    }
+
+    .description {
+        font-family: $header-font;
+        font-size: 3rem;
+        margin: 0 auto;
+        text-align: center;
+        width: 80%;
+        font-weight: 600;
+        margin-top: 30px;
+    }
+
+    .data-container {
+        position: relative;
+        margin-top: 200px;
+    }
+
+    .chart-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-title {
+        font-size: 2rem;
+        font-weight: 600;
+    }
+
+    .card-desc {
+        font-weight: 500;
+    }
+
+    .data {
+        font-weight: 400;
+    }
+
+    .card-shadow {
+        background-color: $primary;
+        height: 240px;
+        width: 350px;
+        z-index: -1;
+    }
+
+    div.chart-shadow {
+        width: 610px;
+        height: 400px;
+    }
+
+    .left-shadow {
+        position: absolute;
+        top: -15px;
+        left: -15px;
+    }
+
+    .right-shadow {
+        position: absolute;
+        top: -15px;
+        right: -55px;
+    }
+
+    .card-content {
+        width: 300px;
+        min-height: 320px;
+        padding: 25px;
+        line-height: 2;
+        background-color: #FFFFFF;
+    }
+
+    div.chart-card {
+        width: 560px;
+        min-height: 450px;
+    }
+
+    #deviceType-chart {
+        width: 500px;
+        height: 400px;
+    }
+
+    #browser-chart {
+        width: 500px;
+        height: 400px;
+    }
+
+    #regions-chart {
+
+    }
+
+    .data-container 
+    .col.m6.right-side-text {
+        position: relative;
+        right: -45px;
+    }
+
+    .card-about {
+        position: relative;
+        top: 33px;
+        max-width: 350px;
+    }
+
+    div.mobile-about {
+        top: 0;
+    }
+
+    div.software-card {
+        position: absolute;
+        right: -33px;
+    }
+
+    ul.data.lists {
+        padding-left: 20px;
+        margin-top: 0;
+    }
+
+    ul li.list-item {
+        list-style-type: circle;
+    }
+
+    .top-margin {
+        margin-top: 250px
+    }
+
+    .learn-more {
+        font-family: $header-font;
+        font-size: 1.7rem;
+    }
+
+    .link-btn {
+        background-color: $secondary;
+        font-family: $header-font;
+        display: block;
+    }
+
+    .link-btn:hover {
+        background-color: #d4db32;
+    }
+
+    #user-agent-exp {
+        margin-top: 20px;
+    }
+
+    #user-agent-spoof {
+        margin-top: 20px;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+
+    .banner {
+        height: 510px;
+    }
+
+    .data-container 
+    .col.m6.right-side-text {
+        position: relative;
+        right: -55px;
+    }
+}
+
+
+@media only screen and (min-width: 1250px) {
+
+    .card-title {
+        font-size: 2.5rem;
+        font-weight: 600;
+    }
+
+    .card-desc {
+        font-size: 1.25rem;
+    }
+
+    .card-shadow {
+        background-color: $primary;
+        height: 260px;
+        width: 440px;
+        z-index: -1;
+    }
+
+    #hardware-shadow {
+        position: absolute;
+        top: -20px;
+        left: -15px;
+    }
+
+    .card-content {
+        width: 387px;
+        height: 400px;
+        padding: 25px;
+        line-height: 2;
+        background-color: #FFFFFF;
+    }
+
+    .data-container 
+    .col.m6.right-side-text {
+        position: relative;
+        right: -55px;
+    }
+
+    .card-about {
+        max-width: 550px;
+    }
+
+    .explanation {
+        font-size: 1.25rem;
+    }
+
+    .learn-more {
+        font-size: 2rem;
+    }
+
+    .top-margin {
+        margin-top: 350px
+    }
+}

@@ -14,8 +14,8 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Routes
-require("./app/routing/apiRoutes")(app);
-require("./app/routing/htmlRoutes")(app);
+require("./routing/apiRoutes")(app);
+require("./routing/htmlRoutes")(app);
 
 var syncOptions = {
   force: false
