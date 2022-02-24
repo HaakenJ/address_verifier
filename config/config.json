@@ -1,0 +1,21 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "kramer",
+    "database": "address_verifier",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "kramer",
+    "database": "address_verifier",
+    "host": "localhost",
+    "dialect": "postgres",
+    "logging": false
+  },
+  "production": {
+    "use_env_variable": "JAWSDB_URL",
+    "dialect": "mysql"
+  }
+}

@@ -1,0 +1,1 @@
+const FIREBASE_KEY = "AIzaSyB0Rta_4wEQCQJzoer2fwZTN4Gej1MJY3A";
