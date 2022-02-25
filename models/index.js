@@ -1,3 +1,8 @@
+/**
+ * This module is mostly boilerplate code from sequelize for starting the
+ * database connection.
+ */
+
 "use strict";
 
 var fs = require("fs");
@@ -8,6 +13,7 @@ var env = process.env.NODE_ENV || "development";
 var config = require(__dirname + "/../config/config.json")[env];
 var db = {};
 
+// our database info is stored in the config file
 var sequelize = new Sequelize(
   config.database,
   config.username,
