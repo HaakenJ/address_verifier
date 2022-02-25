@@ -1,3 +1,9 @@
+/**
+ * This is the file where we wil define our database models.
+ * Each table has it's own model and this maps the data we receive from
+ * the database into the proper datatypes.
+ */
+
 // 'use strict';
 // module.exports = (sequelize, DataTypes) => {
 //   const userdata = sequelize.define('userdata', {
