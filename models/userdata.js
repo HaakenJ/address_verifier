@@ -6,7 +6,7 @@
 
 // 'use strict';
 // module.exports = (sequelize, DataTypes) => {
-//   const userdata = sequelize.define('userdata', {
+//   const countries = sequelize.define('userdata', {
 //     ipAddress: DataTypes.STRING,
 //     devType: DataTypes.STRING,
 //     vendor: DataTypes.STRING,
