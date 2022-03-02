@@ -1,3 +1,4 @@
+const { sequelize } = require("../models");
 const db = require("../models");
 
 // This is where all the api methods will reside, at least the part that asks the repository
@@ -6,19 +7,21 @@ const db = require("../models");
 // this exports the functions to the server
 module.exports = function(app) {
 
+  // get all countries
   app.get('/api/countries', (req, res) => {
-    console.log('getting countries');
-
     result = [
       {
+        id: 1,
         name: 'USA',
         districtLabel: 'state'
       },
       {
+        id: 2,
         name: 'Brazil',
         districtLabel: 'state'
       },
       {
+        id: 3,
         name: 'South Korea',
         districtLabel: 'district'
       }
@@ -26,6 +29,96 @@ module.exports = function(app) {
 
     res.json(result);
   });
+
+  // get districts by country id
+  app.get('/api/districts/countryId', (req, res) => {
+    var id = req.query.countryId;
+
+    var result = [
+      {
+        id: 1,
+        name: 'washington'
+      },
+      {
+        id: 2,
+        name: 'oregon'
+      },
+      {
+        id: 3,
+        name: 'california'
+      }
+    ];
+
+    res.json(result);
+  })
+
+  // get district by name
+  app.get('/api/districts/name', (req, res) => {
+    var name = req.query.name;
+
+    var result = {
+      id: 1,
+      name: 'washington'
+    };
+
+    res.json(result);
+  })
+
+  // get cities by district id
+  app.get('/api/cities/districtId', (req, res) => {
+    var id = req.query.id;
+
+    result = [
+      {
+        id: 1,
+        name: 'seattle'
+      },
+      {
+        id: 2,
+        name: 'tacoma'
+      },
+      {
+        id: 3,
+        name: 'bellingham'
+      }
+    ];
+
+    res.json(result);
+  }) 
+
+  // get city by name
+  app.get('/api/cities/name', (req, res) => {
+    var name = req.query.name;
+
+    var result = {
+      id: 1,
+      name: 'seattle'
+    };
+
+    res.json(result);
+  })
+
+  // get addresses by city id
+  app.get('/api/addresses/cityId', (req, res) => {
+    var id = req.query.id;
+
+    result = [
+      {
+        id: 1,
+        name: '222 5th Ave N'
+      },
+      {
+        id: 2,
+        name: '1530 3rd Ave'
+      },
+      {
+        id: 3,
+        name: '5400 14th Ave NW'
+      }
+    ];
+
+    res.json(result);
+  }) 
 
   // // post method, has the parameters of the path for calling it and a callback function
   // // the callback has a request and a response

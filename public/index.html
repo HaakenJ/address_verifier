@@ -32,7 +32,7 @@
 
     <div class='row'>
         <!-- Dropdown Trigger -->
-        <a class='dropdown-trigger btn' href='#' data-target='country-dropdown'>Click to select your country!</a>
+        <a id="dropdown-title" class='dropdown-trigger btn' href='#' data-target='country-dropdown'>Click to select your country!</a>
 
         <!-- country dropdown -->
         <ul id='country-dropdown' class='dropdown-content'>
@@ -41,8 +41,25 @@
 
     <div class="row">
         <div id="state-input" class="input-field col s6">
-            <input id="state-box" type="text" class="validate">
+            <input id="state-box" type="text" class="validate autocomplete state-autocomplete">
             <label id="state-box-label" class="active" for="state-box">State</label>
+            <a id="state-submit" class="waves-effect waves-light btn">Continue</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="city-input" class="input-field col s6">
+            <input id="city-box" type="text" class="validate autocomplete city-autocomplete">
+            <label id="city-box-label" class="active" for="city-box">City</label>
+            <a id="city-submit" class="waves-effect waves-light btn">Continue</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="address-input" class="input-field col s6">
+            <input id="address-box" type="text" class="validate autocomplete address-autocomplete">
+            <label id="address-box-label" class="active" for="address-box">Address</label>
+            <a id="address-submit" class="waves-effect waves-light btn">Continue</a>
         </div>
     </div>
         
@@ -53,9 +70,10 @@
     <!-- Materialize -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- javascript -->
-    <script src="js/index.js"></script>
-    <!-- API Functions -->
-    <script src="js/requests.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/populators.js"></script>
+    <script src="js/inputControl.js"></script>
+    <script src="js/index.js"></script>    
 </body>
 
 </html>
