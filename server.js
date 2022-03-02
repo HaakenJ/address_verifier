@@ -4,6 +4,7 @@ require("dotenv").config();
 // express is the api we will use for managing the server
 var express = require("express");
 
+
 // our database models are contained in this variable
 var db = require("./models");
 
