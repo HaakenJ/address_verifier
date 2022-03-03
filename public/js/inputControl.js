@@ -1,3 +1,5 @@
+const { format } = require("path/posix");
+
 // display district input and call the autocomplete populator
 function showDistrict(country) {
     $('#country-dropdown-title').text(capitalizeFirstLetter(country.name));
@@ -39,4 +41,17 @@ function showAddressAndPostcode(city) {
             alert('Invalid City Input: No matching city found');
         }
     })
+}
+
+// format and display the matching addresses
+// takes in an array of address objects
+function displayMatches(matches) {
+    // loop through matches
+    matches.array.forEach(address => {
+        var formattedAddress = getFormat(address);
+    });
+    // get the format for each country
+    // apply the format to the match
+    // create html element of the match
+    // add the element to the page for display
 }
