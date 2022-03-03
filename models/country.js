@@ -4,6 +4,14 @@
  * the database into the proper datatypes.
  */
 
+const { DataTypes } = require("sequelize/types");
+const { sequelize } = require(".");
+
+module.exports = (sequelize, DataTypes) {
+    id: DataTypes.INTEGER,
+    name: DataTypes.STRING
+}
+
 // 'use strict';
 // module.exports = (sequelize, DataTypes) => {
 //   const countries = sequelize.define('userdata', {
