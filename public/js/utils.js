@@ -3,5 +3,7 @@ function capitalizeFirstLetter(str) {
 }
 
 function formatAddress(address) {
+    var format = formats[address.country];
+    console.log(JSON.stringify(format));
     return "";
 }
