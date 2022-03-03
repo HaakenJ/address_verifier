@@ -45,7 +45,7 @@ function showAddressAndPostcode(city) {
 
 // format and display the matching addresses
 // takes in an array of address objects
-function displayMatches(matches) {
+function displayMatchingAddresses(matches) {
     // loop through matches
     matches.array.forEach(address => {
         // get a string of the formatted address

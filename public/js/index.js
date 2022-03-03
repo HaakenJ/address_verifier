@@ -53,7 +53,7 @@ $(document).ready(function() {
       address: addressText.val()
     }, result => {
       // display the results passing in the array of matches
-      displayResults(result);
+      displayMatchingAddresses(result);
     })
   })
 })
