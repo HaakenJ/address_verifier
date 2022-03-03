@@ -1,0 +1,12 @@
+.center {
+    margin: auto;
+    padding-top: 10%;
+  }
+
+.row .col {
+    float: none;
+}
+
+.input-field {
+    margin: auto;
+}

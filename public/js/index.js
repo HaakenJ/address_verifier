@@ -2,12 +2,16 @@
 // this is jQuery syntax to select an html element
 // the # is the same as css and is used to select by id
 var countryDropdown = $('#country-dropdown');
-var stateInput = $('#state-input');
-var stateText = $('#state-box');
-var stateSubmit = $('#state-submit');
-var cityInput = $('#city-input');
-var cityText = $('#city-box');
-var citySubmit = $('#city-submit');
+
+var districtDropdown = $('#district-dropdown-title');
+var districtList = $('#district-dropdown');
+
+var cityDropdown = $('#city-dropdown-title');
+var cityList = $('#city-dropdown');
+
+var postcodeInput = $('#postcode-input');
+var postcodeText = $('#postcode-box');
+
 var addressInput = $('#address-input');
 var addressText = $('#address-box');
 var addressSubmit = $('#address-submit');
@@ -16,14 +20,10 @@ var addressSubmit = $('#address-submit');
 // this is basically the main function
 $(document).ready(function() {
   // hide inputs
-  stateInput.hide();
-  cityInput.hide();
+  districtDropdown.hide();
+  cityDropdown.hide();
+  postcodeInput.hide();
   addressInput.hide();
-
-
-  // add onlcick handlers
-  stateSubmit.on('click', () => showCity(stateText.val()));
-  citySubmit.on('click', () => showAddress(cityText.val()));
 
   // initialize country dropdown
   $('.dropdown-trigger').dropdown();
@@ -40,5 +40,9 @@ $(document).ready(function() {
       listItem.on('click', () => showDistrict(country));
       countryDropdown.append(listItem);
     })
+  })
+
+  addressSubmit.on('click', () => {
+    
   })
 })

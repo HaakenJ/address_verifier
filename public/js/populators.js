@@ -1,31 +1,28 @@
 // these methods populate the autocomplete lists for all inputs
 
-function populateDistrictAutocomplete(countryId) {
+function populateDistrictDropdown(countryId) {
     // get districts by country
     $.get('/api/districts/countryId', {countryId: countryId}, result => {  
-        var data = {};
-        result.forEach(district => {
-            data[capitalizeFirstLetter(district.name)] = null;
-        });
-  
-        $('input.state-autocomplete').autocomplete({
-            data: data
-        })
+        result.forEach(district => {      
+            var listItem = $('<li><a href=#!>' + capitalizeFirstLetter(district.name) + '</a></li>');
+        
+            // add onClick methods to each list item
+            listItem.on('click', () => showCity(district));
+            districtList.append(listItem);
+        })        
     })
 }
   
-function populateCityAutocomplete(districtId) {
+function populateCityDropdown(districtId) {
     // get cities by district
     $.get('/api/cities/districtId', {districtId: districtId}, result => {
+        result.forEach(city => {      
+            var listItem = $('<li><a href=#!>' + capitalizeFirstLetter(city.name) + '</a></li>');
         
-        var data = {};
-        result.forEach(city => {
-        data[capitalizeFirstLetter(city.name)] = null;
-        });
-
-        $('input.city-autocomplete').autocomplete({
-        data: data
-        })
+            // add onClick methods to each list item
+            listItem.on('click', () => showAddressAndPostcode(city));
+            cityList.append(listItem);
+        })        
     })
 }
 
@@ -39,6 +36,21 @@ function populateAddressAutocomplete(cityId) {
         });
 
         $('input.address-autocomplete').autocomplete({
+            data: data
+        })
+    })
+}
+
+function populatePostcodeAutocomplete(cityId) {
+    // get postcodes by city
+    $.get('/api/postcodes/cityId', {cityId: cityId}, result => {
+        
+        var data = {};
+        result.forEach(postcode => {
+            data[postcode.code] = null;
+        });
+
+        $('input.postcode-autocomplete').autocomplete({
             data: data
         })
     })

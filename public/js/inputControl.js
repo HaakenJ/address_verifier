@@ -1,37 +1,32 @@
 // display district input and call the autocomplete populator
 function showDistrict(country) {
-    $('#dropdown-title').text(capitalizeFirstLetter(country.name));
-    
-    label = capitalizeFirstLetter(country.districtLabel);
-    $('#state-box-label').text(label);
-    stateInput.show();
+    $('#country-dropdown-title').text(capitalizeFirstLetter(country.name));
+
+    districtDropdown.text("Click to select your " + country.districtLabel + "!");
+    districtDropdown.show();
   
-    populateDistrictAutocomplete(country.id);
+    populateDistrictDropdown(country.id);
   }
   
 // display city input and call the autocomplete populator
-function showCity(district) {
-    // hide the state submit button to make things more organized
-    stateSubmit.hide();
-
-    cityInput.show();
-
+function showCity(district) {    
     // get the district by name
     $.get('/api/districts/name', {name: district}, (result, status) => {
-        // populate the autocomplete only if the request was successful
+        // populate the dropdown only if the request was successful
         if (status === 'success') {
-        populateCityAutocomplete(result.id);
+            $('#district-dropdown-title').text(capitalizeFirstLetter(result.name));
+            cityDropdown.show();          
+            populateCityDropdown(result.id);
         } else {
-        alert('Invalid District Input: No matching district found');
+            alert('Invalid District Input: No matching district found');
         }
     })
 }
 
 // display address input and call the autocomplete populator
-function showAddress(city) {
-    // hide the city submit button to make things more organized
-    citySubmit.hide();
+function showAddressAndPostcode(city) {
 
+    postcodeInput.show();
     addressInput.show();
 
     // get the city by name
@@ -39,6 +34,7 @@ function showAddress(city) {
         // populate the autocomplete only if the request was successful
         if (status === 'success') {
             populateAddressAutocomplete(result.id);
+            populatePostcodeAutocomplete(result.id);
         } else {
             alert('Invalid City Input: No matching city found');
         }
