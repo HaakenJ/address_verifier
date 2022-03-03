@@ -28,8 +28,8 @@ function populateCityDropdown(districtId) {
 
 function populateAddressAutocomplete(cityId) {
     // get addresses by city
-    $.get('/api/addresses/cityId', {cityId: cityId}, result => {
-        
+    $.get('/api/addresses/cityId', {cityId: cityId}, result => {        
+
         var data = {};
         result.forEach(address => {
             data[address.name] = null;
@@ -44,10 +44,10 @@ function populateAddressAutocomplete(cityId) {
 function populatePostcodeAutocomplete(cityId) {
     // get postcodes by city
     $.get('/api/postcodes/cityId', {cityId: cityId}, result => {
-        
+        console.log(JSON.stringify(result));
         var data = {};
         result.forEach(postcode => {
-            data[postcode.code] = null;
+            data[postcode.name] = null;
         });
 
         $('input.postcode-autocomplete').autocomplete({
