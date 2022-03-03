@@ -47,9 +47,9 @@ function showAddressAndPostcode(city) {
 // takes in an array of address objects
 function displayMatchingAddresses(matches) {
     // loop through matches
-    matches.array.forEach(address => {
+    matches.forEach(address => {
         // get a string of the formatted address
-        var formattedAddress = getFormat(address);
+        var formattedAddress = formatAddress(address);
     });
     // add the element to the page for display
 }
