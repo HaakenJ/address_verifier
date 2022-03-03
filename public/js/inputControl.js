@@ -48,10 +48,8 @@ function showAddressAndPostcode(city) {
 function displayMatches(matches) {
     // loop through matches
     matches.array.forEach(address => {
+        // get a string of the formatted address
         var formattedAddress = getFormat(address);
     });
-    // get the format for each country
-    // apply the format to the match
-    // create html element of the match
     // add the element to the page for display
 }
