@@ -1,5 +1,3 @@
-const { format } = require("path/posix");
-
 // display district input and call the autocomplete populator
 function showDistrict(country) {
     $('#country-dropdown-title').text(capitalizeFirstLetter(country.name));
@@ -33,6 +31,8 @@ function showAddressAndPostcode(city) {
 
     // get the city by name
     $.get('/api/cities/name', {name: city}, (result, status) => {
+        $('#city-dropdown-title').text(capitalizeFirstLetter(result.name));
+
         // populate the autocomplete only if the request was successful
         if (status === 'success') {
             populateAddressAutocomplete(result.id);
