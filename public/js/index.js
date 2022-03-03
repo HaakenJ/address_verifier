@@ -42,7 +42,18 @@ $(document).ready(function() {
     })
   })
 
+  // submit the address that was entered
   addressSubmit.on('click', () => {
-    
+    // get all matching addresses to the input
+    $.get('/api/matches', {
+      country: countryDropdown.text(),
+      district: districtDropdown.text(),
+      city: cityDropdown.text(),
+      postcode: postcodeText.val(),
+      address: addressText.val()
+    }, result => {
+      // display the results passing in the array of matches
+      displayResults(result);
+    })
   })
 })
