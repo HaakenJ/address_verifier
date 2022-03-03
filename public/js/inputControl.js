@@ -50,6 +50,19 @@ function displayMatchingAddresses(matches) {
     matches.forEach(address => {
         // get a string of the formatted address
         var formattedAddress = formatAddress(address);
+
+        console.log(formattedAddress);
+
+        // create a new element to display the address
+        var addressCard = '<div class="row"> \
+            <div class="col s12 m5 margin-auto pre-line"> \
+                <div class="card-panel"> \
+                    <span class="">' + formattedAddress + '</span> \
+                </div> \
+            </div> \
+        </div>'
+
+        $('#results-container').append(addressCard);
     });
     // add the element to the page for display
 }

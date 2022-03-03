@@ -7,6 +7,10 @@
     float: none;
 }
 
-.input-field {
+.margin-auto {
     margin: auto;
+}
+
+.pre-line {
+    white-space: pre-line;
 }
