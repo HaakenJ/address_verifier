@@ -44,7 +44,7 @@ function populateAddressAutocomplete(cityId) {
 function populatePostcodeAutocomplete(cityId) {
     // get postcodes by city
     $.get('/api/postcodes/cityId', {cityId: cityId}, result => {
-        console.log(JSON.stringify(result));
+
         var data = {};
         result.forEach(postcode => {
             data[postcode.name] = null;
