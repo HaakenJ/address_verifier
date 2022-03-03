@@ -7,9 +7,12 @@
 const { DataTypes } = require("sequelize/types");
 const { sequelize } = require(".");
 
-module.exports = (sequelize, DataTypes) {
-    id: DataTypes.INTEGER,
-    name: DataTypes.STRING
+module.exports = (sequelize, DataTypes) => {
+    const countries = sequelize.define('countries', {
+        id: DataTypes.INTEGER,
+        name: DataTypes.STRING,
+        districtLabel: DataTypes.STRING
+    })
 }
 
 // 'use strict';
