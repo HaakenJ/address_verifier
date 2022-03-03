@@ -32,7 +32,7 @@ function populateAddressAutocomplete(cityId) {
         
         var data = {};
         result.forEach(address => {
-            data[capitalizeFirstLetter(address.name)] = null;
+            data[address.name] = null;
         });
 
         $('input.address-autocomplete').autocomplete({
