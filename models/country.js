@@ -4,9 +4,6 @@
  * the database into the proper datatypes.
  */
 
-const { DataTypes } = require("sequelize/types");
-const { sequelize } = require(".");
-
 module.exports = (sequelize, DataTypes) => {
     const countries = sequelize.define('countries', {
         id: DataTypes.INTEGER,
