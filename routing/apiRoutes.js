@@ -120,6 +120,28 @@ module.exports = function(app) {
     res.json(result);
   }) 
 
+  // get postcodes by city id
+  app.get('/api/postcodes/cityId', (req, res) => {
+    var id = req.query.id;
+
+    result = [
+      {
+        id: 1,
+        name: '98109'
+      },
+      {
+        id: 2,
+        name: '98101'
+      },
+      {
+        id: 3,
+        name: '98023'
+      }
+    ];
+
+    res.json(result);
+  }) 
+
   // // post method, has the parameters of the path for calling it and a callback function
   // // the callback has a request and a response
   // // the req has a body of parameters we can access we send back the res
