@@ -142,6 +142,34 @@ module.exports = function(app) {
     res.json(result);
   }) 
 
+  // get all matching addresses to the address passed in
+  app.get('/api/matches', (req, res) => {
+    var country = req.query.country;
+    var district = req.query.district;
+    var city = req.query.city;
+    var postcode = req.query.postcode;
+    var address = req.query.address;
+
+    var result = [
+      {
+        country: 'USA',
+        district: 'washington',
+        city: 'seattle',
+        postcode: '98101',
+        address: '1530 3rd Ave'
+      },
+      {
+        country: 'USA',
+        district: 'washington',
+        city: 'seattle',
+        postcode: '98101',
+        address: '5400 14th Ave NW'
+      }
+    ];
+
+    res.json(result);
+  })
+
   // // post method, has the parameters of the path for calling it and a callback function
   // // the callback has a request and a response
   // // the req has a body of parameters we can access we send back the res
