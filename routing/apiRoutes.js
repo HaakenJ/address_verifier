@@ -27,11 +27,9 @@ module.exports = function(app) {
     )
   });
 
-  // get districts by country id
-  app.get('/api/districts/countryId', (req, res) => {
+  // get districts by country name
+  app.get('/api/districts/country', (req, res) => {
     var country = req.query.country;
-
-    console.log("/api/districts/countryId " + id);
 
     var result = [
       {
@@ -55,8 +53,6 @@ module.exports = function(app) {
   app.get('/api/districts/name', (req, res) => {
     var name = req.query.name;
 
-    console.log("/api/districts/name " + name);
-
     var result = {
       id: 1,
       name: 'washington'
@@ -65,11 +61,9 @@ module.exports = function(app) {
     res.json(result);
   })
 
-  // get cities by district id
-  app.get('/api/cities/districtId', (req, res) => {
-    var id = req.query.id;
-
-    console.log("/api/cities/districtId " + id);
+  // get cities by district
+  app.get('/api/cities/district', (req, res) => {
+    var id = req.query.district;
 
     result = [
       {
@@ -93,8 +87,6 @@ module.exports = function(app) {
   app.get('/api/cities/name', (req, res) => {
     var name = req.query.name;
 
-    console.log("/api/cities/name " + name);
-
     var result = {
       id: 1,
       name: 'seattle'
@@ -103,11 +95,9 @@ module.exports = function(app) {
     res.json(result);
   })
 
-  // get addresses line 1 by city id
-  app.get('/api/addresses/1/cityId', (req, res) => {
-    var id = req.query.id;
-
-    console.log("/api/addresses/1/cityId " + id);
+  // get addresses line 1 by city
+  app.get('/api/addresses/1/city', (req, res) => {
+    var id = req.query.city;
 
     result = [
       {
@@ -127,11 +117,9 @@ module.exports = function(app) {
     res.json(result);
   }) 
 
-  // get addresses line 2 by city id
-  app.get('/api/addresses/2/cityId', (req, res) => {
-    var id = req.query.id;
-
-    console.log("/api/addresses/2/cityId " + id);
+  // get addresses line 2 by city
+  app.get('/api/addresses/2/city', (req, res) => {
+    var id = req.query.city;
 
     result = [
       {
@@ -151,11 +139,9 @@ module.exports = function(app) {
     res.json(result);
   }) 
 
-  // get postcodes by city id
-  app.get('/api/postcodes/cityId', (req, res) => {
-    var id = req.query.id;
-
-    console.log("/api/postcodes/cityId " + id);
+  // get postcodes by city
+  app.get('/api/postcodes/city', (req, res) => {
+    var id = req.query.city;
 
     result = [
       {
