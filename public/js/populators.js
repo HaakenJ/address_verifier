@@ -1,9 +1,9 @@
 // these methods populate the autocomplete lists for all inputs
 
-function populateDistrictDropdown(countryId) {
+function populateDistrictDropdown(country) {
     districtList.empty();
     // get districts by country
-    $.get('/api/districts/countryId', {id: countryId}, result => {  
+    $.get('/api/districts/country', {country: country}, result => {  
         result.forEach(district => {      
             var listItem = $('<li><a href=#!>' + capitalizeFirstLetter(district.name) + '</a></li>');
         

@@ -27,20 +27,9 @@ module.exports = function(app) {
     )
   });
 
-  // app.get('/api/countries', (req, res) => {
-  //   result = address.findAll({
-  //     include: {
-  //       model: addresss,
-  //       attributes:['country']
-  //     }
-  //   })
-
-  //   res.json(result);
-  // });
-
   // get districts by country id
   app.get('/api/districts/countryId', (req, res) => {
-    var id = req.query.id;
+    var country = req.query.country;
 
     console.log("/api/districts/countryId " + id);
 

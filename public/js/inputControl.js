@@ -5,7 +5,7 @@ function showDistrict(country) {
     districtDropdown.text("Click to select your " + country.districtLabel + "!");
     districtDropdown.show();
   
-    populateDistrictDropdown(country.id);
+    populateDistrictDropdown(country.country_name);
   }
   
 // display city input and call the autocomplete populator
