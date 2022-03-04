@@ -9,9 +9,9 @@ function showDistrict(country) {
   }
   
 // display city input and call the autocomplete populator
-function showCity(district) {    
+function showCity(districtName) {    
     // get the district by name
-    $.get('/api/districts/name', {name: district}, (result, status) => {
+    $.get('/api/districts/name', {name: districtName}, (result, status) => {
         // populate the dropdown only if the request was successful
         if (status === 'success') {
             districtDropdownTitle.text(capitalizeFirstLetter(result.district));
@@ -24,14 +24,14 @@ function showCity(district) {
 }
 
 // display address input and call the autocomplete populator
-function showAddressAndPostcode(city) {
+function showAddressAndPostcode(cityName) {
 
     postcodeInput.show();
     addressInput1.show();
     addressInput2.show();
 
     // get the city by name
-    $.get('/api/cities/name', {name: city}, (result, status) => {
+    $.get('/api/cities/name', {name: cityName}, (result, status) => {
         cityDropdownTitle.text(capitalizeFirstLetter(result.name));
 
         // populate the autocomplete only if the request was successful

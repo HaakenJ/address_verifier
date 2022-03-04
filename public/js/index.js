@@ -41,13 +41,13 @@ $(document).ready(function() {
   // get countries and display in dropdown
   // this sends a get request to that url then the next parameter
   // is a function to run with the response
-  $.get('/api/countries', (response) => {
+  $.get('/api/countries', results => {
     // loop through response and add list items to the dropdown
-    response.forEach(country => {      
-      var listItem = $('<li><a href=#!>' + country.country_name + '</a></li>');
+    results.forEach(result => {      
+      var listItem = $('<li><a href=#!>' + result.country_name + '</a></li>');
 
       // add onClick methods to each list item
-      listItem.on('click', () => showDistrict(country));
+      listItem.on('click', () => showDistrict(result));
       countryDropdown.append(listItem);
     })
   })

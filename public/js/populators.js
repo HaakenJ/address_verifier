@@ -1,9 +1,9 @@
 // these methods populate the autocomplete lists for all inputs
 
-function populateDistrictDropdown(country) {
+function populateDistrictDropdown(countryName) {
     districtList.empty();
     // get districts by country
-    $.get('/api/districts/country', {country: country}, results => {  
+    $.get('/api/districts/country', {name: countryName}, results => {  
         results.forEach(result => {      
             var listItem = $('<li><a href=#!>' + capitalizeFirstLetter(result.district) + '</a></li>');
         
@@ -14,10 +14,10 @@ function populateDistrictDropdown(country) {
     })
 }
   
-function populateCityDropdown(district) {
+function populateCityDropdown(districtName) {
     cityList.empty();
     // get cities by district
-    $.get('/api/cities/district', {district: district}, results => {
+    $.get('/api/cities/district', {district: districtName}, results => {
         results.forEach(result => {      
             var listItem = $('<li><a href=#!>' + capitalizeFirstLetter(result.city) + '</a></li>');
         
@@ -28,9 +28,9 @@ function populateCityDropdown(district) {
     })
 }
 
-function populateAddressAutocomplete(city) {
+function populateAddressAutocomplete(cityName) {
     // get address line 1 by city
-    $.get('/api/addresses/1/city', {name: city}, results => {        
+    $.get('/api/addresses/1/city', {name: cityName}, results => {        
 
         var data = {};
         results.forEach(result => {
@@ -43,7 +43,7 @@ function populateAddressAutocomplete(city) {
     })
 
     // get address line 2 by city
-    $.get('/api/addresses/2/city', {name: city}, results => {        
+    $.get('/api/addresses/2/city', {name: cityName}, results => {        
 
         var data = {};
         results.forEach(result => {
@@ -56,9 +56,9 @@ function populateAddressAutocomplete(city) {
     })
 }
 
-function populatePostcodeAutocomplete(city) {
+function populatePostcodeAutocomplete(cityName) {
     // get postcodes by city
-    $.get('/api/postcodes/city', {name: city}, results => {
+    $.get('/api/postcodes/city', {name: cityName}, results => {
 
         var data = {};
         results.forEach(result => {

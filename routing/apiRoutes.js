@@ -29,7 +29,7 @@ module.exports = function(app) {
 
   // get districts by country name
   app.get('/api/districts/country', (req, res) => {
-    var country = req.query.country;
+    var name = req.query.name;
 
     var result = [
       {
@@ -63,7 +63,7 @@ module.exports = function(app) {
 
   // get cities by district
   app.get('/api/cities/district', (req, res) => {
-    var id = req.query.district;
+    var name = req.query.name;
 
     result = [
       {
@@ -97,7 +97,7 @@ module.exports = function(app) {
 
   // get addresses line 1 by city
   app.get('/api/addresses/1/city', (req, res) => {
-    var id = req.query.city;
+    var name = req.query.name;
 
     result = [
       {
@@ -119,7 +119,7 @@ module.exports = function(app) {
 
   // get addresses line 2 by city
   app.get('/api/addresses/2/city', (req, res) => {
-    var id = req.query.city;
+    var name = req.query.name;
 
     result = [
       {
@@ -141,7 +141,7 @@ module.exports = function(app) {
 
   // get postcodes by city
   app.get('/api/postcodes/city', (req, res) => {
-    var id = req.query.city;
+    var name = req.query.name;
 
     result = [
       {
