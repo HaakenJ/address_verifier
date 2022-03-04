@@ -14,3 +14,24 @@
 .pre-line {
     white-space: pre-line;
 }
+
+nav {
+    background-color: #48A9A6;
+    color: #48A9A6;
+}
+
+body {
+    background-color: #E4DFDA;
+}
+
+.dropdown-trigger {
+    background-color: #C1666B !important;   
+}
+
+.btn {
+    background-color: #C1666B;
+}
+
+#postcode-box-label, #address-box-label {
+    color: #C1666B;
+}
