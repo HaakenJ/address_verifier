@@ -11,11 +11,11 @@ function showDistrict(country) {
 // display city input and call the autocomplete populator
 function showCity(district) {    
     // get the district by name
-    $.get('/api/districts/name', {name: district}, (result, status) => {
+    $.get('/api/districts/name', {name: district.name}, (result, status) => {
         // populate the dropdown only if the request was successful
         if (status === 'success') {
             districtDropdownTitle.text(capitalizeFirstLetter(result.name));
-            cityDropdown.show();          
+            cityDropdown.show();         
             populateCityDropdown(result.id);
         } else {
             alert('Invalid District Input: No matching district found');
@@ -27,10 +27,11 @@ function showCity(district) {
 function showAddressAndPostcode(city) {
 
     postcodeInput.show();
-    addressInput.show();
+    addressInput1.show();
+    addressInput2.show();
 
     // get the city by name
-    $.get('/api/cities/name', {name: city}, (result, status) => {
+    $.get('/api/cities/name', {name: city.name}, (result, status) => {
         cityDropdownTitle.text(capitalizeFirstLetter(result.name));
 
         // populate the autocomplete only if the request was successful
@@ -79,7 +80,8 @@ async function getMatchingAddresses() {
             district: '',
             city: '',
             postcode: '',
-            address: ''
+            address1: '',
+            address2: '',
         }
 
         // populate data with entered values on the form
@@ -87,7 +89,8 @@ async function getMatchingAddresses() {
         data.district = districtDropdownTitle.text() !== 'Click to select your district!' ? districtDropdownTitle.text() : '';
         data.city = cityDropdownTitle.text() !== 'Click to select your city!' ? cityDropdownTitle.text() : '';
         data.postcode = postcodeText.val() !== '' ? postcodeText.val() : '';
-        data.address = addressText.val() !== '' ? addressText.val() : '';        
+        data.address1 = addressText1.val() !== '' ? addressText1.val() : '';        
+        data.address2 = addressText2.val() !== '' ? addressText2.val() : '';        
 
         $.get('/api/matches', data, result => {
             resolve(result);

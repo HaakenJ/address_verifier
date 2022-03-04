@@ -15,8 +15,12 @@ var cityDropdownTitle = $('#city-dropdown-title');
 var postcodeInput = $('#postcode-input');
 var postcodeText = $('#postcode-box');
 
-var addressInput = $('#address-input');
-var addressText = $('#address-box');
+var addressInput1 = $('#address-input-1');
+var addressText1 = $('#address-box-1');
+
+var addressInput2 = $('#address-input-2');
+var addressText2 = $('#address-box-2');
+
 var addressSubmit = $('#address-submit');
 
 var resultsContainer = $('#results-container');
@@ -28,7 +32,8 @@ $(document).ready(function() {
   districtDropdown.hide();
   cityDropdown.hide();
   postcodeInput.hide();
-  addressInput.hide();
+  addressInput1.hide();
+  addressInput2.hide();
 
   // initialize country dropdown
   $('.dropdown-trigger').dropdown();

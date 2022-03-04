@@ -1,3 +1,4 @@
+const { idle_in_transaction_session_timeout } = require("pg/lib/defaults");
 const { sequelize } = require("../models");
 const db = require("../models");
 
@@ -32,7 +33,9 @@ module.exports = function(app) {
 
   // get districts by country id
   app.get('/api/districts/countryId', (req, res) => {
-    var id = req.query.countryId;
+    var id = req.query.id;
+
+    console.log("/api/districts/countryId " + id);
 
     var result = [
       {
@@ -56,6 +59,8 @@ module.exports = function(app) {
   app.get('/api/districts/name', (req, res) => {
     var name = req.query.name;
 
+    console.log("/api/districts/name " + name);
+
     var result = {
       id: 1,
       name: 'washington'
@@ -67,6 +72,8 @@ module.exports = function(app) {
   // get cities by district id
   app.get('/api/cities/districtId', (req, res) => {
     var id = req.query.id;
+
+    console.log("/api/cities/districtId " + id);
 
     result = [
       {
@@ -90,6 +97,8 @@ module.exports = function(app) {
   app.get('/api/cities/name', (req, res) => {
     var name = req.query.name;
 
+    console.log("/api/cities/name " + name);
+
     var result = {
       id: 1,
       name: 'seattle'
@@ -98,9 +107,11 @@ module.exports = function(app) {
     res.json(result);
   })
 
-  // get addresses by city id
-  app.get('/api/addresses/cityId', (req, res) => {
+  // get addresses line 1 by city id
+  app.get('/api/addresses/1/cityId', (req, res) => {
     var id = req.query.id;
+
+    console.log("/api/addresses/1/cityId " + id);
 
     result = [
       {
@@ -120,9 +131,35 @@ module.exports = function(app) {
     res.json(result);
   }) 
 
+  // get addresses line 2 by city id
+  app.get('/api/addresses/2/cityId', (req, res) => {
+    var id = req.query.id;
+
+    console.log("/api/addresses/2/cityId " + id);
+
+    result = [
+      {
+        id: 1,
+        name: 'APT 212'
+      },
+      {
+        id: 2,
+        name: 'BLDG 2'
+      },
+      {
+        id: 3,
+        name: 'STE 323'
+      }
+    ];
+
+    res.json(result);
+  }) 
+
   // get postcodes by city id
   app.get('/api/postcodes/cityId', (req, res) => {
     var id = req.query.id;
+
+    console.log("/api/postcodes/cityId " + id);
 
     result = [
       {
@@ -148,7 +185,10 @@ module.exports = function(app) {
     var district = req.query.district;
     var city = req.query.city;
     var postcode = req.query.postcode;
-    var address = req.query.address;
+    var address1 = req.query.address1;
+    var address2 = req.query.address2;
+
+    console.log(country + " " + district + " " + "city");
 
     var result = [
       {
