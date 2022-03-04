@@ -2,7 +2,7 @@
 function showDistrict(country) {
     countryDropdownTitle.text(capitalizeFirstLetter(country.country_name));
 
-    districtDropdown.text("Click to select your " + country.districtLabel + "!");
+    districtDropdown.text("Click to select your " + country.district_type + "!");
     districtDropdown.show();
   
     populateDistrictDropdown(country.country_name);
@@ -11,12 +11,12 @@ function showDistrict(country) {
 // display city input and call the autocomplete populator
 function showCity(district) {    
     // get the district by name
-    $.get('/api/districts/name', {name: district.name}, (result, status) => {
+    $.get('/api/districts/name', {name: district}, (result, status) => {
         // populate the dropdown only if the request was successful
         if (status === 'success') {
-            districtDropdownTitle.text(capitalizeFirstLetter(result.name));
+            districtDropdownTitle.text(capitalizeFirstLetter(result.district));
             cityDropdown.show();         
-            populateCityDropdown(result.id);
+            populateCityDropdown(result.district);
         } else {
             alert('Invalid District Input: No matching district found');
         }
@@ -31,13 +31,13 @@ function showAddressAndPostcode(city) {
     addressInput2.show();
 
     // get the city by name
-    $.get('/api/cities/name', {name: city.name}, (result, status) => {
+    $.get('/api/cities/name', {name: city}, (result, status) => {
         cityDropdownTitle.text(capitalizeFirstLetter(result.name));
 
         // populate the autocomplete only if the request was successful
         if (status === 'success') {
-            populateAddressAutocomplete(result.id);
-            populatePostcodeAutocomplete(result.id);
+            populateAddressAutocomplete(result.city);
+            populatePostcodeAutocomplete(result.city);
         } else {
             alert('Invalid City Input: No matching city found');
         }

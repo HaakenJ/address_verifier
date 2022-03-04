@@ -3,38 +3,38 @@
 function populateDistrictDropdown(country) {
     districtList.empty();
     // get districts by country
-    $.get('/api/districts/country', {country: country}, result => {  
-        result.forEach(district => {      
-            var listItem = $('<li><a href=#!>' + capitalizeFirstLetter(district.name) + '</a></li>');
+    $.get('/api/districts/country', {country: country}, results => {  
+        results.forEach(result => {      
+            var listItem = $('<li><a href=#!>' + capitalizeFirstLetter(result.district) + '</a></li>');
         
             // add onClick methods to each list item
-            listItem.on('click', () => showCity(district));
+            listItem.on('click', () => showCity(result.district));
             districtList.append(listItem);
         })        
     })
 }
   
-function populateCityDropdown(districtId) {
+function populateCityDropdown(district) {
     cityList.empty();
     // get cities by district
-    $.get('/api/cities/districtId', {id: districtId}, result => {
-        result.forEach(city => {      
-            var listItem = $('<li><a href=#!>' + capitalizeFirstLetter(city.name) + '</a></li>');
+    $.get('/api/cities/district', {district: district}, results => {
+        results.forEach(result => {      
+            var listItem = $('<li><a href=#!>' + capitalizeFirstLetter(result.city) + '</a></li>');
         
             // add onClick methods to each list item
-            listItem.on('click', () => showAddressAndPostcode(city));
+            listItem.on('click', () => showAddressAndPostcode(result.city));
             cityList.append(listItem);
         })        
     })
 }
 
-function populateAddressAutocomplete(cityId) {
+function populateAddressAutocomplete(city) {
     // get address line 1 by city
-    $.get('/api/addresses/1/cityId', {id: cityId}, result => {        
+    $.get('/api/addresses/1/city', {name: city}, results => {        
 
         var data = {};
-        result.forEach(address => {
-            data[address.name] = null;
+        results.forEach(result => {
+            data[result.addressLine1] = null;
         });
 
         $('input.address-autocomplete-1').autocomplete({
@@ -43,11 +43,11 @@ function populateAddressAutocomplete(cityId) {
     })
 
     // get address line 2 by city
-    $.get('/api/addresses/2/cityId', {id: cityId}, result => {        
+    $.get('/api/addresses/2/city', {name: city}, results => {        
 
         var data = {};
-        result.forEach(address => {
-            data[address.name] = null;
+        results.forEach(result => {
+            data[result.addressLine2] = null;
         });
 
         $('input.address-autocomplete-2').autocomplete({
@@ -56,13 +56,13 @@ function populateAddressAutocomplete(cityId) {
     })
 }
 
-function populatePostcodeAutocomplete(cityId) {
+function populatePostcodeAutocomplete(city) {
     // get postcodes by city
-    $.get('/api/postcodes/cityId', {id: cityId}, result => {
+    $.get('/api/postcodes/city', {name: city}, results => {
 
         var data = {};
-        result.forEach(postcode => {
-            data[postcode.name] = null;
+        results.forEach(result => {
+            data[result.postcode] = null;
         });
 
         $('input.postcode-autocomplete').autocomplete({
