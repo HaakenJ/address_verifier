@@ -11,7 +11,6 @@ function formatAddress(address) {
     // for-in syntax is for js objects
     // for-of syntax is for arrays and other normal iterables
     for (var line in format) {
-        console.log('line: ' + line);
         for (var addressPart of format[line]) {
             var value = "";
 

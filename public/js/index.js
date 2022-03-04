@@ -2,12 +2,15 @@
 // this is jQuery syntax to select an html element
 // the # is the same as css and is used to select by id
 var countryDropdown = $('#country-dropdown');
+var countryDropdownTitle = $('#country-dropdown-title');
 
 var districtDropdown = $('#district-dropdown-title');
 var districtList = $('#district-dropdown');
+var districtDropdownTitle = $('#district-dropdown-title');
 
 var cityDropdown = $('#city-dropdown-title');
 var cityList = $('#city-dropdown');
+var cityDropdownTitle = $('#city-dropdown-title');
 
 var postcodeInput = $('#postcode-input');
 var postcodeText = $('#postcode-box');
@@ -45,15 +48,10 @@ $(document).ready(function() {
   // submit the address that was entered
   addressSubmit.on('click', () => {
     // get all matching addresses to the input
-    $.get('/api/matches', {
-      country: countryDropdown.text(),
-      district: districtDropdown.text(),
-      city: cityDropdown.text(),
-      postcode: postcodeText.val(),
-      address: addressText.val()
-    }, result => {
+    // .then specifies that we will wait until this function is complete before continuing
+    getMatchingAddresses().then(result => {
       // display the results passing in the array of matches
       displayMatchingAddresses(result);
-    })
+    })    
   })
 })
