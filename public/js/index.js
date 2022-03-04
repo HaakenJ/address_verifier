@@ -43,8 +43,9 @@ $(document).ready(function() {
   // is a function to run with the response
   $.get('/api/countries', (response) => {
     // loop through response and add list items to the dropdown
+    console.log(JSON.stringify(response));
     response.forEach(country => {      
-      var listItem = $('<li><a href=#!>' + country.name + '</a></li>');
+      var listItem = $('<li><a href=#!>' + country.country_name + '</a></li>');
 
       // add onClick methods to each list item
       listItem.on('click', () => showDistrict(country));

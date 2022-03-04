@@ -9,28 +9,22 @@ var models = db.address;
 // this exports the functions to the server
 module.exports = function(app) {
 
-  // get all countries
+  // get all distinct country names
   app.get('/api/countries', (req, res) => {
-    // result = [
-    //   {
-    //     id: 1,
-    //     name: 'USA',
-    //     // districtLabel: 'state'
-    //   },
-    //   {
-    //     id: 2,
-    //     name: 'Brazil',
-    //     districtLabel: 'state'
-    //   },
-    //   {
-    //     id: 3,
-    //     name: 'South Korea',
-    //     districtLabel: 'district'
-    //   }
-    // ];
-    var result = models.findAll();
-
-    res.json(result);
+    models.findAll(
+      { 
+        attributes: [db.sequelize.fn('DISTINCT', db.sequelize.col('country_name')) ,'country_name']
+      }).then(
+      result => {
+        res.json(result);
+      }
+    ).catch(
+      err => {
+        console.error("error getting countries:", err);
+        res.status(500);
+        res.send('Server error getting countries');
+      }
+    )
   });
 
   // app.get('/api/countries', (req, res) => {

@@ -1,6 +1,6 @@
 // display district input and call the autocomplete populator
 function showDistrict(country) {
-    countryDropdownTitle.text(capitalizeFirstLetter(country.name));
+    countryDropdownTitle.text(capitalizeFirstLetter(country.country_name));
 
     districtDropdown.text("Click to select your " + country.districtLabel + "!");
     districtDropdown.show();
