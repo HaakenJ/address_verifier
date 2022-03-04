@@ -17,7 +17,7 @@ function populateDistrictDropdown(countryName) {
 function populateCityDropdown(districtName) {
     cityList.empty();
     // get cities by district
-    $.get('/api/cities/district', {district: districtName}, results => {
+    $.get('/api/cities/district', {name: districtName}, results => {
         results.forEach(result => {      
             var listItem = $('<li><a href=#!>' + capitalizeFirstLetter(result.city) + '</a></li>');
         
