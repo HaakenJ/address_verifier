@@ -4,12 +4,15 @@
  * the database into the proper datatypes.
  */
 
-module.exports = (sequelize, DataTypes) => {
-    const countries = sequelize.define('countries', {
-        id: DataTypes.INTEGER,
-        name: DataTypes.STRING,
-        districtLabel: DataTypes.STRING
-    })
+module.exports = (sequelize, Sequelize) => {
+    const address = sequelize.define('address', {
+        id: Sequelize.INTEGER,
+        addressLine1: Sequelize.STRING,
+        addressLine2: Sequelize.String,
+        postalCode: Sequelize.String,
+        districtLabel: Sequelize.STRING,
+        countryName: Sequelize.STRING
+    });
 }
 
 // 'use strict';

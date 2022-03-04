@@ -2,6 +2,8 @@ const { idle_in_transaction_session_timeout } = require("pg/lib/defaults");
 const { sequelize } = require("../models");
 const db = require("../models");
 
+var models = db.address;
+
 // This is where all the api methods will reside, at least the part that asks the repository
 // for the data does any necessary procesing before responding with the data
 
@@ -10,26 +12,38 @@ module.exports = function(app) {
 
   // get all countries
   app.get('/api/countries', (req, res) => {
-    result = [
-      {
-        id: 1,
-        name: 'USA',
-        districtLabel: 'state'
-      },
-      {
-        id: 2,
-        name: 'Brazil',
-        districtLabel: 'state'
-      },
-      {
-        id: 3,
-        name: 'South Korea',
-        districtLabel: 'district'
-      }
-    ];
+    // result = [
+    //   {
+    //     id: 1,
+    //     name: 'USA',
+    //     // districtLabel: 'state'
+    //   },
+    //   {
+    //     id: 2,
+    //     name: 'Brazil',
+    //     districtLabel: 'state'
+    //   },
+    //   {
+    //     id: 3,
+    //     name: 'South Korea',
+    //     districtLabel: 'district'
+    //   }
+    // ];
+    var result = models.findAll();
 
     res.json(result);
   });
+
+  // app.get('/api/countries', (req, res) => {
+  //   result = address.findAll({
+  //     include: {
+  //       model: addresss,
+  //       attributes:['country']
+  //     }
+  //   })
+
+  //   res.json(result);
+  // });
 
   // get districts by country id
   app.get('/api/districts/countryId', (req, res) => {
