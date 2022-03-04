@@ -13,7 +13,7 @@ module.exports = function(app) {
   app.get('/api/countries', (req, res) => {
     models.findAll(
       { 
-        attributes: [db.sequelize.fn('DISTINCT', db.sequelize.col('country_name')) ,'country_name']
+        attributes: [db.sequelize.fn('DISTINCT', db.sequelize.col('country_name')) ,'country_name', 'district_type']
       }).then(
       result => {
         res.json(result);
