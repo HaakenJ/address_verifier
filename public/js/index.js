@@ -19,6 +19,8 @@ var addressInput = $('#address-input');
 var addressText = $('#address-box');
 var addressSubmit = $('#address-submit');
 
+var resultsContainer = $('#results-container');
+
 // this method runs automatically as soon as the page is rendered
 // this is basically the main function
 $(document).ready(function() {

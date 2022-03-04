@@ -46,7 +46,7 @@ function showAddressAndPostcode(city) {
 // format and display the matching addresses
 // takes in an array of address objects
 function displayMatchingAddresses(matches) {
-    
+    resultsContainer.empty();
     // loop through matches
     matches.forEach(address => {
         // get a string of the formatted address
@@ -61,7 +61,7 @@ function displayMatchingAddresses(matches) {
             </div> \
         </div>'
 
-        $('#results-container').append(addressCard);
+        resultsContainer.append(addressCard);
     });
     // add the element to the page for display
 }
