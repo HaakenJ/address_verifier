@@ -1,4 +1,3 @@
-const { idle_in_transaction_session_timeout } = require("pg/lib/defaults");
 const { sequelize } = require("../models");
 const db = require("../models");
 

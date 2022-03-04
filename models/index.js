@@ -14,13 +14,16 @@ var config = require(__dirname + "/../config/config.json")[env];
 var db = {};
 
 // our database info is stored in the config file
-var sequelize = new Sequelize(
-  config.database,
-  config.username,
-  config.password,
-  config
-);
-
+if (config.use_env_variable) {
+  var sequelize = new Sequelize(process.env[config.use_env_variable]);
+} else {
+  var sequelize = new Sequelize(
+    config.database,
+    config.username,
+    config.password,
+    config
+  );
+}
 
 fs.readdirSync(__dirname)
   .filter(function(file) {
@@ -30,8 +33,9 @@ fs.readdirSync(__dirname)
   })
   .forEach(function(file) {
     // require(path.join(__dirname, file))
-    var model = require(path.join(__dirname, file));
+    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
     db[model.name] = model;
+    console.log("*****************" + model.name);
   });
 
 Object.keys(db).forEach(function(modelName) {
