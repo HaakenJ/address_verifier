@@ -1,6 +1,7 @@
 // these methods populate the autocomplete lists for all inputs
 
 function populateDistrictDropdown(countryId) {
+    districtList.empty();
     // get districts by country
     $.get('/api/districts/countryId', {countryId: countryId}, result => {  
         result.forEach(district => {      
@@ -14,6 +15,7 @@ function populateDistrictDropdown(countryId) {
 }
   
 function populateCityDropdown(districtId) {
+    cityList.empty();
     // get cities by district
     $.get('/api/cities/districtId', {districtId: districtId}, result => {
         result.forEach(city => {      
