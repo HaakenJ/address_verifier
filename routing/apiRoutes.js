@@ -27,39 +27,41 @@ module.exports = function(app) {
     )
   });
 
-  // get districts by country name
+  // get districts by country name - param key is 'country'
+  //TODO: check if we need to return the country name along with each district result
   app.get('/api/districts/country', (req, res) => {
-    var name = req.query.name;
+    var name = req.query.country;
 
-    var result = [
-      {
-        id: 1,
-        name: 'washington'
-      },
-      {
-        id: 2,
-        name: 'oregon'
-      },
-      {
-        id: 3,
-        name: 'california'
+    models.findAll({
+      attributes: [db.sequelize.fn('DISTINCT', db.sequelize.col('district')) ,'country_name', 'district'], where: { country_name: name}
+    }).then(
+      result => { res.json(result); }
+    ).catch(
+      err => {
+        console.error("error getting countries:", err);
+        res.status(500);
+        res.send('Server error getting countries');
       }
-    ];
+    )
+  });
 
-    res.json(result);
-  })
 
   // get district by name
   app.get('/api/districts/name', (req, res) => {
     var name = req.query.name;
 
-    var result = {
-      id: 1,
-      name: 'washington'
-    };
-
-    res.json(result);
-  })
+    // models.findAll({
+    //   attribute: [db.sequelize.fn('DISTINCT', db.sequelize.col('district', 'country_name')), 'country_name', 'district'], where: { district : name }
+    // }).then (
+    //   result => { res.json(result); }
+    // ).catch(
+    //   err => {
+    //     console.error("error getting districts: ", err);
+    //     res.status(500);
+    //     res.send("Server error: could not find the specified district");
+    //   }
+    // )
+  });
 
   // get cities by district
   app.get('/api/cities/district', (req, res) => {
@@ -139,26 +141,22 @@ module.exports = function(app) {
     res.json(result);
   }) 
 
-  // get postcodes by city
+  // get all postcodes by all cities
   app.get('/api/postcodes/city', (req, res) => {
-    var name = req.query.name;
-
-    result = [
-      {
-        id: 1,
-        name: '98109'
-      },
-      {
-        id: 2,
-        name: '98101'
-      },
-      {
-        id: 3,
-        name: '98023'
+    models.findAll(
+      { 
+        attributes: [db.sequelize.fn('DISTINCT', db.sequelize.col('city')) ,'city', 'district_type']
+      }).then(
+      result => {
+        res.json(result);
       }
-    ];
-
-    res.json(result);
+    ).catch(
+      err => {
+        console.error("error getting countries:", err);
+        res.status(500);
+        res.send('Server error getting countries');
+      }
+    )
   }) 
 
   // get all matching addresses to the address passed in
