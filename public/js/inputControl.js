@@ -81,7 +81,7 @@ async function getMatchingAddresses() {
             city: '',
             postcode: '',
             address1: '',
-            address2: '',
+            address2: ''
         }
 
         // populate data with entered values on the form
