@@ -135,17 +135,17 @@ module.exports = function(app) {
           res.send('Could not find any record with the provided city');
         }
         else{
-          res.status(200); 
+          res.json(result);
         }
       }
     ).catch(
       err => {
         console.error("error getting cities: ", err);
-        res.status(400);
+        res.status(500);
         res.send("Server error retrieving data for the given argument(s)");
       }
     )
-  })
+  });
 
 
   // get addresses line 1 by city
@@ -201,11 +201,11 @@ module.exports = function(app) {
     ];
 
     res.json(result);
-  }) 
+  }); 
 
   // get all postcodes by all cities
   app.get('/api/postcodes/city', (req, res) => {
-    var name = req.query.city;
+    var name = req.query.name;
 
 
     models.findAll(
@@ -218,7 +218,7 @@ module.exports = function(app) {
       }
     ).catch(
       err => {
-        console.error("error getting countries:", err);
+        console.error("error getting postal codes:", err);
         res.status(500);
         res.send('Server error getting countries');
       }
@@ -233,7 +233,7 @@ module.exports = function(app) {
     var cityName = req.query.city;
     var pcode = req.query.postcode;
     var address1 = req.query.address1;
-    var address2 = req.query.address2;
+    //var address2 = req.query.address2;
 
     //console.log(country + " " + district + " " + "city");
 
