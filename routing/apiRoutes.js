@@ -102,6 +102,7 @@ module.exports = function(app) {
 
   // get cities by district
   app.get('/api/cities/district', (req, res) => {
+    //Add option to include country name as well
     var districtName = req.query.name;
 
     models.findAll({
@@ -117,13 +118,33 @@ module.exports = function(app) {
     )
   }); 
 
-  // get city by name
+  // get city by name to let the client check if a city exists
   app.get('/api/cities/name', (req, res) => {
     var name = req.query.name;
 
-
-
-    res.json(result);
+    //TODO: how to properly let client know? it could just respond with empty string
+    models.findOne({ 
+      where: {
+        city: { [Op.substring]: name}
+      }
+    }).then(
+      result => { 
+        //Check if the result is empty, if so then let the client know
+        if(result.length === 0){
+          res.status(400);
+          res.send('Could not find any record with the provided city');
+        }
+        else{
+          res.status(200); 
+        }
+      }
+    ).catch(
+      err => {
+        console.error("error getting cities: ", err);
+        res.status(400);
+        res.send("Server error retrieving data for the given argument(s)");
+      }
+    )
   })
 
 
@@ -205,6 +226,7 @@ module.exports = function(app) {
   }) 
 
   // get all matching addresses to the address passed in
+  //TODO add input checks
   app.get('/api/matches', (req, res) => {
     var countryName = req.query.country_name;
     var dis = req.query.district;
