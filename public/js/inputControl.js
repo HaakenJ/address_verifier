@@ -9,14 +9,15 @@ function showDistrict(country) {
   }
   
 // display city input and call the autocomplete populator
-function showCity(districtName) {    
+function showCity(districtName) {
     // get the district by name
-    $.get('/api/districts/name', {name: districtName}, (result, status) => {
-        // populate the dropdown only if the request was successful
+    $.get('/api/cities/district', {name: districtName}, (result, status) => {
+        //populate the dropdown only if the request was successful
         if (status === 'success') {
-            districtDropdownTitle.text(capitalizeFirstLetter(result.district));
-            cityDropdown.show();         
-            populateCityDropdown(result.district);
+            districtDropdownTitle.text(capitalizeFirstLetter(districtName));
+            cityDropdown.show();
+            //FIXME can we not pass the entire result instead?         
+            populateCityDropdown(districtName);
         } else {
             alert('Invalid District Input: No matching district found');
         }
@@ -33,7 +34,6 @@ function showAddressAndPostcode(cityName) {
     // get the city by name
     $.get('/api/cities/name', {name: cityName}, (result, status) => {
         cityDropdownTitle.text(capitalizeFirstLetter(result.name));
-
         // populate the autocomplete only if the request was successful
         if (status === 'success') {
             populateAddressAutocomplete(result.city);
