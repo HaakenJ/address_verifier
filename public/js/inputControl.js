@@ -33,11 +33,12 @@ function showAddressAndPostcode(cityName) {
 
     // get the city by name
     $.get('/api/cities/name', {name: cityName}, (result, status) => {
-        cityDropdownTitle.text(capitalizeFirstLetter(result.name));
+        cityDropdownTitle.text(capitalizeFirstLetter(result.city));
         // populate the autocomplete only if the request was successful
         if (status === 'success') {
-            populateAddressAutocomplete(result.city);
-            populatePostcodeAutocomplete(result.city);
+            var cityParam = result.city;
+            populateAddressAutocomplete(cityParam);
+            populatePostcodeAutocomplete(cityParam);
         } else {
             alert('Invalid City Input: No matching city found');
         }
