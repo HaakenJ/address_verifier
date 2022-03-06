@@ -34,7 +34,7 @@ module.exports = function(app) {
     var name = req.query.country;
 
     models.findAll({
-      attributes: [db.sequelize.fn('DISTINCT', db.sequelize.col('district')) ,'country_name', 'district'], where: { country_name: name}
+      attributes: [ [db.sequelize.fn('DISTINCT', db.sequelize.col('district')) , 'district'], 'country_name'], where: { country_name: name}
     }).then(
       result => { res.json(result); }
     ).catch(
@@ -88,7 +88,7 @@ module.exports = function(app) {
     var name = req.query.name;
 
     models.findAll({
-      attribute: [db.sequelize.fn('DISTINCT', db.sequelize.col('addressline1')), 'country_name', 'district'], where: { district : name }
+      attributes: [db.sequelize.fn('DISTINCT', db.sequelize.col('addressline1')), 'country_name', 'district'], where: { district : name }
     }).then (
       result => { res.json(result); }
     ).catch(
@@ -102,25 +102,20 @@ module.exports = function(app) {
 
   // get cities by district
   app.get('/api/cities/district', (req, res) => {
-    var name = req.query.name;
+    var districtName = req.query.name;
 
-    result = [
-      {
-        id: 1,
-        name: 'seattle'
-      },
-      {
-        id: 2,
-        name: 'tacoma'
-      },
-      {
-        id: 3,
-        name: 'bellingham'
+    models.findAll({
+      attributes: [ [db.sequelize.fn('DISTINCT', db.sequelize.col('city')), 'city'], 'district'], where: {district: districtName}
+    }).then (
+      result => { res.json(result); }
+    ).catch (
+      err => {
+        console.error("error getting cities: ", err);
+        res.status(500);
+        res.send("Server error: could not locate the cities for given district name");
       }
-    ];
-
-    res.json(result);
-  }) 
+    )
+  }); 
 
   // get city by name
   app.get('/api/cities/name', (req, res) => {
