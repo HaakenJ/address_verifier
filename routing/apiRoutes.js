@@ -121,37 +121,46 @@ module.exports = function(app) {
   app.get('/api/cities/name', (req, res) => {
     var name = req.query.name;
 
-    var result = {
-      id: 1,
-      name: 'seattle'
-    };
+
 
     res.json(result);
   })
 
+
   // get addresses line 1 by city
+  //FIXME implementing as getting all addresses by city for now
   app.get('/api/addresses/1/city', (req, res) => {
-    var name = req.query.name;
+    var cityName = req.query.name;
 
-    result = [
-      {
-        id: 1,
-        name: '222 5th Ave N'
-      },
-      {
-        id: 2,
-        name: '1530 3rd Ave'
-      },
-      {
-        id: 3,
-        name: '5400 14th Ave NW'
+    //In case client also provides a country name
+    var countryName = req.query.country_name;
+
+    models.findAll({
+      where: { city: { [Op.substring]: cityName } }
+    }).then (
+      result => {
+        //Narrow down results when a country filter is given
+        if(countryName){
+          var finalResult = [];
+          for(var i = 0; i < result.length; i++){
+            if(result[i].country_name === countryName){
+              finalResult.push(result[i]);
+            }
+          }
+          result = finalResult;
+        }
+        res.json(result); }
+    ).catch(
+      err => {
+        console.error("error getting cities: ", err);
+        res.status(500);
+        res.send("Server error: could not locate addresses for given city name");
       }
-    ];
-
-    res.json(result);
-  }) 
+    )
+  });
 
   // get addresses line 2 by city
+  //TODO do we need this?? 
   app.get('/api/addresses/2/city', (req, res) => {
     var name = req.query.name;
 
