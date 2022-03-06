@@ -1,5 +1,6 @@
 const { sequelize } = require("../models");
 const db = require("../models");
+const { Sequelize, Op } = require("sequelize");
 
 var models = db.address;
 
@@ -45,22 +46,58 @@ module.exports = function(app) {
     )
   });
 
+  // get all addresses given partial inputs
+  // params: 'input', 'country_name'
+  app.get('/api/addresses/find', (req, res) => {
+    var inputStr = req.query.input;
+    //parse for country name in case client wants to narrow down results
+    var countryName = req.query.country_name;
 
-  // get district by name
-  app.get('/api/districts/name', (req, res) => {
+    models.findAll({
+      where: {
+        [Op.or]: [
+          {addressline1: { [Op.substring]: inputStr} }, 
+          {addressline2: { [Op.substring]: inputStr} }
+        ]
+      }
+    }).then(
+       result => { 
+         //Filter down the result if a country name is provided
+        if(countryName){
+          var finalResult = [];
+          for(var i = 0; i < result.length; i++){
+            if(result[i].country_name === countryName){
+              finalResult.push(result[i]);
+            }
+          }
+          result = finalResult;
+        }
+        res.json(result) }
+    ).catch(
+      err => {
+        console.error("error getting addresses:", err);
+        res.status(500);
+        res.send('Could not find any matching addresses from the partial input');
+      }
+    )
+  });
+
+
+  // get address line by district name, return all matching addresses
+  app.get('/api/addresses/1/district', (req, res) => {
     var name = req.query.name;
 
-    // models.findAll({
-    //   attribute: [db.sequelize.fn('DISTINCT', db.sequelize.col('district', 'country_name')), 'country_name', 'district'], where: { district : name }
-    // }).then (
-    //   result => { res.json(result); }
-    // ).catch(
-    //   err => {
-    //     console.error("error getting districts: ", err);
-    //     res.status(500);
-    //     res.send("Server error: could not find the specified district");
-    //   }
-    // )
+    models.findAll({
+      attribute: [db.sequelize.fn('DISTINCT', db.sequelize.col('addressline1')), 'country_name', 'district'], where: { district : name }
+    }).then (
+      result => { res.json(result); }
+    ).catch(
+      err => {
+        console.error("error getting districts: ", err);
+        res.status(500);
+        res.send("Server error: could not find the specified district");
+      }
+    )
   });
 
   // get cities by district
