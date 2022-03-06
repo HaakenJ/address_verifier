@@ -12,13 +12,16 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER, 
             primaryKey: true
         },
-        addressLine1: DataTypes.STRING,
-        addressLine2: DataTypes.STRING,
-        postalCode: DataTypes.STRING,
+        addressline1: DataTypes.STRING,
+        addressline2: DataTypes.STRING,
+        postcode: DataTypes.STRING,
         district: DataTypes.STRING,
-        districtLabel: DataTypes.STRING,
-        countryCode: DataTypes.STRING,
-        countryName: DataTypes.STRING
+        district_type: DataTypes.STRING,
+        country_code: DataTypes.STRING,
+        country_name: DataTypes.STRING
+    }, 
+    {
+        timestamps: false
     }, {});
     return address;
 }
