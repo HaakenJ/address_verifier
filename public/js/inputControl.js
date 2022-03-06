@@ -52,13 +52,17 @@ function displayMatchingAddresses(matches) {
     // loop through matches
     matches.forEach(address => {
         // get a string of the formatted address
-        var formattedAddress = formatAddress(address);
+        //TODO implement formatAddress
+        //ar formattedAddress = formatAddress(address);
+
+        //FIXME: this line is only for test reading the result and show on UI
+        var final = address.addressline1 + "\n" + address.city + "\n" + address.country_name;
 
         // create a new element to display the address
         var addressCard = '<div class="row"> \
             <div class="col s12 m5 margin-auto pre-line"> \
                 <div class="card-panel"> \
-                    <span class="">' + formattedAddress + '</span> \
+                    <span class="">' + final + '</span> \
                 </div> \
             </div> \
         </div>'
@@ -86,7 +90,7 @@ async function getMatchingAddresses() {
         }
 
         // populate data with entered values on the form
-        data.country = countryDropdownTitle.text() !== 'Click to select your country!' ? countryDropdownTitle.text() : '';
+        data.country_name = countryDropdownTitle.text() !== 'Click to select your country!' ? countryDropdownTitle.text() : '';
         data.district = districtDropdownTitle.text() !== 'Click to select your district!' ? districtDropdownTitle.text() : '';
         data.city = cityDropdownTitle.text() !== 'Click to select your city!' ? cityDropdownTitle.text() : '';
         data.postcode = postcodeText.val() !== '' ? postcodeText.val() : '';
