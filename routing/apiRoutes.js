@@ -88,7 +88,7 @@ module.exports = function(app) {
     var name = req.query.name;
 
     models.findAll({
-      attributes: [db.sequelize.fn('DISTINCT', db.sequelize.col('addressline1')), 'country_name', 'district'], where: { district : name }
+      attributes: [ [db.sequelize.fn('DISTINCT', db.sequelize.col('addressline1')), 'addressline1'], 'country_name', 'district'], where: { district : name }
     }).then (
       result => { res.json(result); }
     ).catch(
@@ -220,7 +220,7 @@ module.exports = function(app) {
       err => {
         console.error("error getting postal codes:", err);
         res.status(500);
-        res.send('Server error getting countries');
+        res.send('Server error getting postal codes');
       }
     )
   }) 
