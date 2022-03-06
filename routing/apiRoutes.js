@@ -31,7 +31,7 @@ module.exports = function(app) {
   // get districts by country name - param key is 'country'
   //TODO: check if we need to return the country name along with each district result
   app.get('/api/districts/country', (req, res) => {
-    var name = req.query.country;
+    var name = req.query.name;
 
     models.findAll({
       attributes: [ [db.sequelize.fn('DISTINCT', db.sequelize.col('district')) , 'district'], 'country_name'], where: { country_name: name}
@@ -184,9 +184,13 @@ module.exports = function(app) {
 
   // get all postcodes by all cities
   app.get('/api/postcodes/city', (req, res) => {
+    var name = req.query.city;
+
+
     models.findAll(
       { 
-        attributes: [db.sequelize.fn('DISTINCT', db.sequelize.col('city')) ,'city', 'district_type']
+        attributes: [db.sequelize.fn('DISTINCT', db.sequelize.col('postcode')) ,'city', 'district_type'],
+        where: {city: name}
       }).then(
       result => {
         res.json(result);
@@ -202,34 +206,37 @@ module.exports = function(app) {
 
   // get all matching addresses to the address passed in
   app.get('/api/matches', (req, res) => {
-    var country = req.query.country;
-    var district = req.query.district;
-    var city = req.query.city;
-    var postcode = req.query.postcode;
+    var countryName = req.query.country_name;
+    var dis = req.query.district;
+    var cityName = req.query.city;
+    var pcode = req.query.postcode;
     var address1 = req.query.address1;
     var address2 = req.query.address2;
 
-    console.log(country + " " + district + " " + "city");
+    //console.log(country + " " + district + " " + "city");
 
-    var result = [
-      {
-        country: 'USA',
-        district: 'washington',
-        city: 'seattle',
-        postcode: '98101',
-        address: '1530 3rd Ave'
-      },
-      {
-        country: 'USA',
-        district: 'washington',
-        city: 'seattle',
-        postcode: '98101',
-        address: '5400 14th Ave NW'
+    models.findAll({
+      where: {
+        //Give them some leeway for address inputs
+        addressline1: { [Op.substring]: address1 },
+        //addressline2: { [Op.substring]: address2 },
+        postcode: pcode,
+        city: cityName,
+        district: dis,
+
+        //Also some room for country name
+        country_name: { [Op.substring] : countryName }
       }
-    ];
-
-    res.json(result);
-  })
+    }).then (
+      result => { res.json(result); }
+    ).catch(
+      err => {
+        console.error("error getting countries:", err);
+        res.status(500);
+        res.send('Server error getting addresses for given parameters');
+      }
+    )
+  });
 
   // // post method, has the parameters of the path for calling it and a callback function
   // // the callback has a request and a response
