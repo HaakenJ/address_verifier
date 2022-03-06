@@ -34,27 +34,37 @@ function populateAddressAutocomplete(cityName) {
 
         var data = {};
         results.forEach(result => {
-            data[result.addressLine1] = null;
+            data[result.addressline1] = null;
         });
 
         $('input.address-autocomplete-1').autocomplete({
             data: data
         })
-    })
-
-    // get address line 2 by city
-    $.get('/api/addresses/2/city', {name: cityName}, results => {        
-
-        var data = {};
+    
+        var data2 = {};
         results.forEach(result => {
-            data[result.addressLine2] = null;
+            data2[result.addressline2] = null;
         });
 
         $('input.address-autocomplete-2').autocomplete({
-            data: data
+            data2: data2
         })
-    })
+    })    
 }
+
+    // get address line 2 by city
+//     $.get('/api/addresses/2/city', {name: cityName}, results => {        
+
+//         var data2 = {};
+//         results.forEach(result => {
+//             data[result.addressLine2] = null;
+//         });
+
+//         $('input.address-autocomplete-2').autocomplete({
+//             data: data
+//         })
+//     })
+// }
 
 function populatePostcodeAutocomplete(cityName) {
     // get postcodes by city
