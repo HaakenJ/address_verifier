@@ -37,7 +37,7 @@ function populateAddressAutocomplete(cityName) {
             data[result.addressline1] = null;
         });
 
-        $('input.address-autocomplete-1').autocomplete({
+        $('.address-autocomplete-1').autocomplete({
             data: data
         })
     
@@ -46,8 +46,8 @@ function populateAddressAutocomplete(cityName) {
             data2[result.addressline2] = null;
         });
 
-        $('input.address-autocomplete-2').autocomplete({
-            data2: data2
+        $('.address-autocomplete-2').autocomplete({
+            data: data2
         })
     })    
 }
