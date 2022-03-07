@@ -4,7 +4,7 @@ function capitalizeFirstLetter(str) {
 
 function formatAddress(address) {
     // get the format for the country
-    var format = formats[address.country]['format'];
+    var format = formats[address.country_name]['format'];
     var result = "";
 
     // loop through the format lines

@@ -35,6 +35,7 @@ function showAddressAndPostcode(cityName) {
     $.get('/api/cities/name', {name: cityName}, (result, status) => {
         cityDropdownTitle.text(capitalizeFirstLetter(result.city));
         // populate the autocomplete only if the request was successful
+        console.log(result.city);
         if (status === 'success') {
             var cityParam = result.city;
             populateAddressAutocomplete(cityParam);
@@ -52,17 +53,16 @@ function displayMatchingAddresses(matches) {
     // loop through matches
     matches.forEach(address => {
         // get a string of the formatted address
-        //TODO implement formatAddress
-        //ar formattedAddress = formatAddress(address);
+        var formattedAddress = formatAddress(address);
 
         //FIXME: this line is only for test reading the result and show on UI
-        var final = address.addressline1 + "\n" + address.city + "\n" + address.country_name;
+        // var final = address.addressline1 + "\n" + address.city + "\n" + address.country_name;
 
         // create a new element to display the address
         var addressCard = '<div class="row"> \
             <div class="col s12 m5 margin-auto pre-line"> \
                 <div class="card-panel"> \
-                    <span class="">' + final + '</span> \
+                    <span class="">' + formattedAddress + '</span> \
                 </div> \
             </div> \
         </div>'
@@ -76,33 +76,25 @@ function displayMatchingAddresses(matches) {
 // the call to the server is asynchronous so we will specify that this function returns a promise
 // once the get call is done, it will resolve the promise with the result, informing the 'await' 
 // part of the function that it can continue.  
-async function getMatchingAddresses() {
+function getMatchingAddresses() {
+    var data = {
+        countryName: '',
+        district: '',
+        city: '',
+        postcode: '',
+        addressLine1: '',
+        addressLine2: ''
+    }
 
-    var promise = new Promise((resolve, reject) => {
-        // create data that will be sent
-        var data = {
-            country: '',
-            district: '',
-            city: '',
-            postcode: '',
-            address1: '',
-            address2: ''
-        }
+    // populate data with entered values on the form
+    data.countryName = countryDropdownTitle.text() !== 'Click to select your country!' ? countryDropdownTitle.text() : '';
+    data.district = districtDropdownTitle.text().includes('Click to select your') === false ? districtDropdownTitle.text() : '';
+    data.city = cityDropdownTitle.text() !== 'Click to select your city!' ? cityDropdownTitle.text() : '';
+    data.postcode = postcodeText.val() !== '' ? postcodeText.val() : '';
+    data.addressLine1 = addressText1.val() !== '' ? addressText1.val() : '';        
+    data.addressLIne2 = addressText2.val() !== '' ? addressText2.val() : '';
 
-        // populate data with entered values on the form
-        data.country_name = countryDropdownTitle.text() !== 'Click to select your country!' ? countryDropdownTitle.text() : '';
-        data.district = districtDropdownTitle.text() !== 'Click to select your district!' ? districtDropdownTitle.text() : '';
-        data.city = cityDropdownTitle.text() !== 'Click to select your city!' ? cityDropdownTitle.text() : '';
-        data.postcode = postcodeText.val() !== '' ? postcodeText.val() : '';
-        data.address1 = addressText1.val() !== '' ? addressText1.val() : '';        
-        data.address2 = addressText2.val() !== '' ? addressText2.val() : '';        
-
-        $.get('/api/matches', data, result => {
-            resolve(result);
-          })
+    $.get('/api/matches', data, (result, status) => {
+        displayMatchingAddresses(result);
     })
-
-    var result = await promise;
-    
-    return result;
 }

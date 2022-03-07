@@ -54,11 +54,7 @@ $(document).ready(function() {
 
   // submit the address that was entered
   addressSubmit.on('click', () => {
-    // get all matching addresses to the input
-    // .then specifies that we will wait until this function is complete before continuing
-    getMatchingAddresses().then(result => {
-      // display the results passing in the array of matches
-      displayMatchingAddresses(result);
-    })    
+    // get and display all matching addresses to the input
+    getMatchingAddresses();    
   })
 })

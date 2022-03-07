@@ -1,6 +1,7 @@
 const { sequelize } = require("../models");
 const db = require("../models");
 const { Sequelize, Op } = require("sequelize");
+const buildSearchQuery = require('./routeUtils');
 
 var models = db.address;
 
@@ -203,14 +204,14 @@ module.exports = function(app) {
     res.json(result);
   }); 
 
-  // get all postcodes by all cities
+  // get all postcodes for a given city
   app.get('/api/postcodes/city', (req, res) => {
     var name = req.query.name;
 
 
     models.findAll(
       { 
-        attributes: [db.sequelize.fn('DISTINCT', db.sequelize.col('postcode')) ,'city', 'district_type'],
+        attributes: [db.sequelize.fn('DISTINCT', db.sequelize.col('postcode')) ,'postcode'],
         where: {city: name}
       }).then(
       result => {
@@ -228,29 +229,15 @@ module.exports = function(app) {
   // get all matching addresses to the address passed in
   //TODO add input checks
   app.get('/api/matches', (req, res) => {
-    var countryName = req.query.country_name;
-    var dis = req.query.district;
-    var cityName = req.query.city;
-    var pcode = req.query.postcode;
-    var address1 = req.query.address1;
-    //var address2 = req.query.address2;
-
-    //console.log(country + " " + district + " " + "city");
+    var query = buildSearchQuery(req.query);
 
     models.findAll({
-      where: {
-        //Give them some leeway for address inputs
-        addressline1: { [Op.substring]: address1 },
-        //addressline2: { [Op.substring]: address2 },
-        postcode: pcode,
-        city: cityName,
-        district: dis,
-
-        //Also some room for country name
-        country_name: { [Op.substring] : countryName }
+      where: query,
+      limit: 20
+    }).then (      
+      result => { 
+        res.json(result);
       }
-    }).then (
-      result => { res.json(result); }
     ).catch(
       err => {
         console.error("error getting countries:", err);
@@ -259,71 +246,4 @@ module.exports = function(app) {
       }
     )
   });
-
-  // // post method, has the parameters of the path for calling it and a callback function
-  // // the callback has a request and a response
-  // // the req has a body of parameters we can access we send back the res
-  // app.post("/api/userData", (req, res) => {
-  //   console.log(req.body);
-  //   // this is calling a sequelize repository function to create data
-  //   // .then means that once the create method is done, do this next function
-  //   // => is shorthand for creating an anonymous function
-  //   // the .then method receives the result of the creation (dbuserdata)
-  //   // and adds it to the response as json
-  //   db.userdata.create(req.body).then(dbuserdata => {
-  //     res.json(dbuserdata);
-  //   });
-  // });
-
-  // // get method that calls the findAll repository method
-  // // check sequelize docs for explanation of findAll
-  // app.get("/api/devtype", (req, res) => {
-  //   db.tablename.findAll({
-  //     attributes: ["devType", [db.sequelize.fn("COUNT", db.sequelize.col("devType")), "no_devType"]],
-  //     group: ["devType"]
-  //   }).then(result => {
-  //     res.json(result);
-  //   });
-  // });
-
-  // app.get("/api/browser", (req, res) => {
-  //   db.userdata.findAll({
-  //     attributes: ["devType", "browser", [db.sequelize.fn("COUNT", db.sequelize.col("browser")), "no_browser"]],
-  //     where: {devType: "PC"},
-  //     group: ["browser"]
-  //   }).then(pcBrowsers => {
-  //     db.userdata.findAll({
-  //       attributes: ["devType", "browser", [db.sequelize.fn("COUNT", db.sequelize.col("browser")), "no_browser"]],
-  //       where: {devType: "tablet"},
-  //       group: ["browser"]
-  //     }).then(tabBrowsers => {
-  //       db.userdata.findAll({
-  //         attributes: ["devType", "browser", [db.sequelize.fn("COUNT", db.sequelize.col("browser")), "no_browser"]],
-  //         where: {devType: "mobile"},
-  //         group: ["browser"]
-  //       }).then(mobBrowsers => {
-  //         let response = {
-  //           pcBrowsers: pcBrowsers,
-  //           tabBrowsers: tabBrowsers,
-  //           mobBrowsers: mobBrowsers
-  //         };
-  //         res.json(response);
-  //       });
-  //     });
-  //   });
-  // });
-
-  // app.get("/api/location", (req, res) => {
-  //   db.userdata.findAll({
-  //     attributes: ["country", [db.sequelize.fn("COUNT", db.sequelize.col("country")), "no_country"]],
-  //     group: ["country"]
-  //   }).then(countryInfo => {
-  //     res.json(countryInfo);
-  //   });
-  // });
-
-  // app.get("/api/mapKey", (req, res) => {
-  //   const key = process.env.MAPS_KEY;
-  //   res.json(key);
-  // })
-};
+}
