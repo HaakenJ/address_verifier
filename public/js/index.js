@@ -21,9 +21,13 @@ var addressText1 = $('#address-box-1');
 var addressInput2 = $('#address-input-2');
 var addressText2 = $('#address-box-2');
 
+var addressTextWhatever = $('#address-box-whatever');
+var addressWhateverSubmit = $('#address-whatever-submit');
+
 var addressSubmit = $('#address-submit');
 
 var resultsContainer = $('#results-container');
+var resultsContainer2 = $('#results-container2');
 
 // this method runs automatically as soon as the page is rendered
 // this is basically the main function
@@ -57,4 +61,11 @@ $(document).ready(function() {
     // get and display all matching addresses to the input
     getMatchingAddresses();    
   })
+
+  addressWhateverSubmit.on('click', () => {
+    //get anything that matches the given input
+    getAnythingMatches();
+  })
+
+
 })

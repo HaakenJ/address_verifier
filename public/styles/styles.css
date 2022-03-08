@@ -35,3 +35,45 @@ body {
 #postcode-box-label, #address-box-label {
     color: #C1666B;
 }
+
+/* Split the screen in half */
+.split {
+    height: 100%;
+    width: 60%;
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+  
+  /* Control the left side */
+  .left {
+    left: 0;
+    float: left;
+    background-color: salmon;
+  }
+  
+  /* Control the right side */
+  .right {
+    right: 0;
+    float: right;
+    background-color: beige;
+  }
+  
+  /* If you want the content centered horizontally and vertically */
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .centeredRight{
+    position: absolute;
+    top: 50%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }

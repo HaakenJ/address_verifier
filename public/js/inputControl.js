@@ -48,7 +48,7 @@ function showAddressAndPostcode(cityName) {
 
 // format and display the matching addresses
 // takes in an array of address objects
-function displayMatchingAddresses(matches) {
+function displayMatchingAddresses(matches, containerName) {
     resultsContainer.empty();
     // loop through matches
     matches.forEach(address => {
@@ -67,7 +67,7 @@ function displayMatchingAddresses(matches) {
             </div> \
         </div>'
 
-        resultsContainer.append(addressCard);
+        containerName.append(addressCard);
     });
     // add the element to the page for display
 }
@@ -95,6 +95,12 @@ function getMatchingAddresses() {
     data.addressLIne2 = addressText2.val() !== '' ? addressText2.val() : '';
 
     $.get('/api/matches', data, (result, status) => {
-        displayMatchingAddresses(result);
+        displayMatchingAddresses(result, resultsContainer);
+    })
+}
+
+function getAnythingMatches(){
+    $.get('api/addresses/find', {input: addressTextWhatever.val()}, (result, status) => {
+        displayMatchingAddresses(result, resultsContainer2);
     })
 }

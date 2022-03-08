@@ -30,60 +30,76 @@
         </nav>
     </div>
 
-    <div class="col-6 center">
-        <div class='row'>
-            <!-- Dropdown Trigger -->
-            <a id="country-dropdown-title" class='dropdown-trigger btn' href='#' data-target='country-dropdown'>Click to select your country!</a>
-
-            <!-- country dropdown -->
-            <ul id='country-dropdown' class='dropdown-content'>
-            </ul>   
-        </div>
-
-        <div class="row">
-            <!-- Dropdown Trigger -->
-            <a id="district-dropdown-title" class='dropdown-trigger btn' href='#' data-target='district-dropdown'>Click to select your district!</a>
-
-            <!-- district dropdown -->
-            <ul id='district-dropdown' class='dropdown-content'>
-            </ul>
-        </div>
-
-        <div class="row">
-            <!-- Dropdown Trigger -->
-            <a id="city-dropdown-title" class='dropdown-trigger btn' href='#' data-target='city-dropdown'>Click to select your city!</a>
-
-            <!-- city dropdown -->
-            <ul id='city-dropdown' class='dropdown-content'>
-            </ul>
-        </div>
-
-        <div class="row">
-            <div id="postcode-input" class="input-field margin-auto col s6">
-                <input id="postcode-box" type="text" class="validate autocomplete postcode-autocomplete">
-                <label id="postcode-box-label" class="active" for="postcode-box">Postcode</label>
+    <div class="split right">
+        <div class="centeredRight">
+            <div id="address-input-whatever" class="input-field margin-auto col s6">
+                <input id="address-box-whatever" type="text">
+                <label id="address-box-label-whatever" class="active" for="address-box-2">Any address</label>
             </div>
-        </div>
+            <a id="address-whatever-submit" class="waves-effect waves-light btn">Search Internationally</a>
 
-        <div class="row">
-            <div id="address-input-1" class="input-field margin-auto col s6">
-                <input id="address-box-1" type="text" class="validate autocomplete address-autocomplete-1">
-                <label id="address-box-label-1" class="active" for="address-box-1">Address Line 1</label>                
-            </div>
-        </br>
-            <div id="address-input-2" class="input-field margin-auto col s6">
-                <input id="address-box-2" type="text" class="validate autocomplete address-autocomplete-2">
-                <label id="address-box-label-2" class="active" for="address-box-2">Address Line 2</label>
-            </div>
-            <a id="address-submit" class="waves-effect waves-light btn">Find formatted addresses</a>
-        </div>
-
-        <div id="results-container" class="row">
-
+            <div id="results-container2" class="row"></div>
         </div>
     </div>
-        
 
+    <div class = "split left">
+        <div class="centered">
+
+            <div class="col-6 center">
+                <div class='row'>
+                    <!-- Dropdown Trigger -->
+                    <a id="country-dropdown-title" class='dropdown-trigger btn' href='#' data-target='country-dropdown'>Click to select your country!</a>
+        
+                    <!-- country dropdown -->
+                    <ul id='country-dropdown' class='dropdown-content'>
+                    </ul>   
+                </div>
+        
+                <div class="row">
+                    <!-- Dropdown Trigger -->
+                    <a id="district-dropdown-title" class='dropdown-trigger btn' href='#' data-target='district-dropdown'>Click to select your district!</a>
+        
+                    <!-- district dropdown -->
+                    <ul id='district-dropdown' class='dropdown-content'>
+                    </ul>
+                </div>
+        
+                <div class="row">
+                    <!-- Dropdown Trigger -->
+                    <a id="city-dropdown-title" class='dropdown-trigger btn' href='#' data-target='city-dropdown'>Click to select your city!</a>
+        
+                    <!-- city dropdown -->
+                    <ul id='city-dropdown' class='dropdown-content'>
+                    </ul>
+                </div>
+        
+                <div class="row">
+                    <div id="postcode-input" class="input-field margin-auto col s6">
+                        <input id="postcode-box" type="text" class="validate autocomplete postcode-autocomplete">
+                        <label id="postcode-box-label" class="active" for="postcode-box">Postcode</label>
+                    </div>
+                </div>
+        
+                <div class="row">
+                    <div id="address-input-1" class="input-field margin-auto col s6">
+                        <input id="address-box-1" type="text" class="validate autocomplete address-autocomplete-1">
+                        <label id="address-box-label-1" class="active" for="address-box-1">Address Line 1</label>                
+                    </div>
+                </br>
+                    <div id="address-input-2" class="input-field margin-auto col s6">
+                        <input id="address-box-2" type="text" class="validate autocomplete address-autocomplete-2">
+                        <label id="address-box-label-2" class="active" for="address-box-2">Address Line 2</label>
+                    </div>
+                    <a id="address-submit" class="waves-effect waves-light btn">Find formatted addresses</a>
+                </div>
+        
+                <div id="results-container" class="row">
+        
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
