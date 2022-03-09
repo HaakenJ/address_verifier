@@ -18,7 +18,9 @@ function formatAddress(address) {
                     ? capitalizeFirstLetter(address[addressPart]) 
                     : address[addressPart];
 
-            result += (value + " ");
+            if(value != null &&  value != 'N.A'){
+                result += (value + " ");
+            }
         }
         result += "\n";
     }
