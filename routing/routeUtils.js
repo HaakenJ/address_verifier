@@ -3,24 +3,24 @@ function buildSearchQuery(address) {
 
     if (address.addressLine1 !== '') {
         data.addressline1 = address.addressLine1;
-      }
-      if (address.addressLine2 !== '') {
+    }
+    if (address.addressLine2 !== '') {
         data.addressline2 = address.addressLine2;
-      }
-      if (address.postcode !== '') {
+    }
+    if (address.postcode !== '') {
         data.postcode = address.postcode;
-      }
-      if (address.city !== '') {
+    }
+    if (address.city !== '') {
         data.city = address.city;
-      }
-      if (address.district !== '') {
+    }
+    if (address.district !== '') {
         data.district = address.district;
-      }
-      if (address.countryName !== '') {
+    }
+    if (address.countryName !== '') {
         data.country_name = address.countryName;
-      }
+    }
 
-      return data;
+    return data;
 }
 
 module.exports = buildSearchQuery;

@@ -35,7 +35,6 @@ function showAddressAndPostcode(cityName) {
     $.get('/api/cities/name', {name: cityName}, (result, status) => {
         cityDropdownTitle.text(capitalizeFirstLetter(result.city));
         // populate the autocomplete only if the request was successful
-        console.log(result.city);
         if (status === 'success') {
             var cityParam = result.city;
             populateAddressAutocomplete(cityParam);
@@ -48,7 +47,7 @@ function showAddressAndPostcode(cityName) {
 
 // format and display the matching addresses
 // takes in an array of address objects
-function displayMatchingAddresses(matches, containerName) {
+function displayMatchingAddresses(matches) {
     resultsContainer.empty();
     // loop through matches
     matches.forEach(address => {
@@ -67,7 +66,7 @@ function displayMatchingAddresses(matches, containerName) {
             </div> \
         </div>'
 
-        containerName.append(addressCard);
+        resultsContainer.append(addressCard);
     });
     // add the element to the page for display
 }
@@ -95,12 +94,35 @@ function getMatchingAddresses() {
     data.addressLIne2 = addressText2.val() !== '' ? addressText2.val() : '';
 
     $.get('/api/matches', data, (result, status) => {
-        displayMatchingAddresses(result, resultsContainer);
+        displayMatchingAddresses(result);
     })
 }
 
 function getAnythingMatches(){
-    $.get('api/addresses/find', {input: addressTextWhatever.val()}, (result, status) => {
-        displayMatchingAddresses(result, resultsContainer2);
+    var data = {
+        countryName: '',
+        district: '',
+        city: '',
+        postcode: '',
+        addressLine1: '',
+        addressLine2: ''
+    }    
+
+    // populate data with entered values on the form
+    data.countryName = countryText.val() !== '' ? countryText.val() : '';
+    data.district = districtText.val() !== '' ? districtText.val() : '';
+    data.city = cityText.val() !== '' ? cityText.val() : '';
+    data.postcode = postcode2Text.val() !== '' ? postcodeText.val() : '';
+    data.addressLine1 = address1Text1.val() !== '' ? address1Text1.val() : '';        
+    data.addressLIne2 = address2Text2.val() !== '' ? address2Text2.val() : '';
+
+    console.log('getAnythingMatches data: ' + JSON.stringify(data));
+
+    $.get('/api/addresses/find', data, (result, status) => {
+        displayMatchingAddresses(result);
     })
+
+    // $.get('api/addresses/find', {input: addressTextWhatever.val()}, (result, status) => {
+    //     displayMatchingAddresses(result, resultsContainer2);
+    // })
 }

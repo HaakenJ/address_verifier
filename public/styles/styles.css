@@ -32,8 +32,25 @@ body {
     background-color: #C1666B;
 }
 
-#postcode-box-label, #address-box-label {
-    color: #C1666B;
+.title {
+  color: #48A9A6;
+  font-weight: 700;
+}
+
+label {
+    color: #C1666B !important; 
+}
+
+.pt-50 {
+  padding-top: 50px;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.align-center {
+  text-align: center;
 }
 
 /* Split the screen in half */
@@ -51,14 +68,14 @@ body {
   .left {
     left: 0;
     float: left;
-    background-color: salmon;
+    /* background-color: salmon; */
   }
   
   /* Control the right side */
   .right {
     right: 0;
     float: right;
-    background-color: beige;
+    /* background-color: beige; */
   }
   
   /* If you want the content centered horizontally and vertically */

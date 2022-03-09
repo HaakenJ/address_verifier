@@ -50,29 +50,33 @@ module.exports = function(app) {
   // get all addresses given partial inputs
   // params: 'input', 'country_name'
   app.get('/api/addresses/find', (req, res) => {
-    var inputStr = req.query.input;
-    //parse for country name in case client wants to narrow down results
-    var countryName = req.query.country_name;
+    // var inputStr = req.query.input;
+    // //parse for country name in case client wants to narrow down results
+    // var countryName = req.query.country_name;
+
+    var input = req.query;
 
     models.findAll({
       where: {
-        [Op.or]: [
-          {addressline1: { [Op.substring]: inputStr} }, 
-          {addressline2: { [Op.substring]: inputStr} }
-        ]
+          addressline1: { [Op.substring]: input.addressLine1} , 
+          addressline2: { [Op.substring]: input.addressLine2} ,
+          postcode: { [Op.substring]: input.postcode} ,
+          city: { [Op.substring]: input.city} ,
+          district: { [Op.substring]: input.district} ,
+          country_name: { [Op.substring]: input.countryName}
       }
     }).then(
        result => { 
          //Filter down the result if a country name is provided
-        if(countryName){
-          var finalResult = [];
-          for(var i = 0; i < result.length; i++){
-            if(result[i].country_name === countryName){
-              finalResult.push(result[i]);
-            }
-          }
-          result = finalResult;
-        }
+        // if(countryName){
+        //   var finalResult = [];
+        //   for(var i = 0; i < result.length; i++){
+        //     if(result[i].country_name === countryName){
+        //       finalResult.push(result[i]);
+        //     }
+        //   }
+        //   result = finalResult;
+        // }
         res.json(result) }
     ).catch(
       err => {
