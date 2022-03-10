@@ -49,6 +49,19 @@ function showAddressAndPostcode(cityName) {
 // takes in an array of address objects
 function displayMatchingAddresses(matches) {
     resultsContainer.empty();
+
+    if(matches.length == 0){
+        // create a new element to display the address
+        var addressCard = '<div class="row"> \
+            <div class="col s12 m5 margin-auto pre-line"> \
+                <div class="card-panel"> \
+                    <span class="">' + "No such address found" + '</span> \
+                </div> \
+            </div> \
+        </div>'
+        resultsContainer.append(addressCard);
+        return;
+    }
     // loop through matches
     matches.forEach(address => {
         // get a string of the formatted address
